@@ -1,7 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import Business from "../pages/Business/Business";
+import NavBar from "../pages/Business/components/NavBar";
+import Orders from "../pages/Business/Orders/Orders";
 
-const Router = () => {
+const HomeRouter = () => {
   return (
     <div>
       <Routes>
@@ -23,20 +26,20 @@ const Router = () => {
         </Route>
 
         {/* Business side rutes */}
-        <Route path="business">
+        <Route path="business" element={<Business />}>
           <Route path="signup" element={"Business signup"} />
-          <Route path="orders" element={"Business Orders"} />
+          <Route path="orders" element={<Orders />} />
           <Route path="products" element={"Business Products List"} />
           <Route path="services" element={"Business Services List"} />
           <Route path="add-product" element={"Business add product page"} />
           <Route path="add-service" element={"Business add service page"} />
           <Route path="payments" element={"Business payments page"} />
           <Route path="profile" element={"Business profile page"} />
-          <Route path="feedback" element={"Business feedback page"} />
+          <Route path="reviews" element={"Business reviews page"} />
         </Route>
       </Routes>
     </div>
   );
 };
 
-export default Router;
+export default HomeRouter;
