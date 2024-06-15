@@ -3,14 +3,16 @@ import { Route, Routes } from "react-router-dom";
 import Business from "../pages/Business/Business";
 import NavBar from "../pages/Business/components/NavBar";
 import Orders from "../pages/Business/Orders/Orders";
+import Login from "../pages/User/components/UserAuth/Login";
+import Register from "../pages/User/components/UserAuth/Registration"
 
 const HomeRouter = () => {
   return (
     <div>
       <Routes>
         {/* Home route */}
-        <Route path="/" element={"Login page"} />
-
+        <Route path="/" element={<Login/>} />
+        <Route path='/register' element ={<Register/>}/>
         {/* Customer side routes */}
         <Route path="customer">
           <Route path="" element={"Customer Home"} />
