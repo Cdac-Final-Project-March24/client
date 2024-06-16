@@ -88,7 +88,6 @@ const Profile = () => {
       
       </div>
       
-
       </div>
 
     </>
