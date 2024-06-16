@@ -1,11 +1,9 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Business from "../pages/Business/Business";
-import NavBar from "../pages/Business/components/NavBar";
 import Orders from "../pages/Business/Orders/Orders";
 import Login from "../pages/User/components/UserAuth/Login";
 import Register from "../pages/User/components/UserAuth/Registration";
-import Payments from "../pages/Business/Payments/Payments";
 
 const HomeRouter = () => {
   return (
