@@ -1,0 +1,8 @@
+.link-hover:hover {
+  color: var(--primary);
+}
+
+/* .nav-link:hover {
+  color: var(--primary);
+  font-size: large;
+} */

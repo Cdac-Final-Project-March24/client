@@ -31,7 +31,7 @@ const NavBar = () => {
   ];
   return (
     <div
-      className="shadow-sm  d-flex flex-column align-items-center"
+      className="shadow-sm  d-flex flex-column ps-2"
       style={{
         background: "white",
         height: "90vh",
@@ -47,14 +47,16 @@ const NavBar = () => {
               <Link
                 className={
                   item.name.toLowerCase() == pathName
-                    ? "nav-link active"
+                    ? "nav-link"
                     : "nav-link link-dark"
                 }
                 aria-current="page"
                 to={item.name.toLowerCase()}
               >
-                <i className={item.icon + " me-2"}></i>
-                {item.name}
+                <div className="link-hover">
+                  <i className={item.icon + " me-2"}></i>
+                  <span className="">{item.name}</span>
+                </div>
               </Link>
             </li>
           );

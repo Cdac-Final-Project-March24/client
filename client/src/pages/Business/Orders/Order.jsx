@@ -8,12 +8,12 @@ const Order = () => {
     >
       <div className="col border-end">
         <h5>Id: 111111</h5>
-        <div>Customer: Customer name</div>
-        <div>
+        <div className="fs-5">Customer: Customer name</div>
+        <div className="fw-light">
           Address: Lorem ipsum dolor sit amet consectetur adipisicing elit.
           Ducimus, cupiditate.
         </div>
-        <div>Date: 02/02/2024</div>
+        <div className="fw-light">Date: 02/02/2024</div>
       </div>
       <div className="col border-end">
         <div className="row">

@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "./components/NavBar";
 import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
+import "./Business.css";
 
 const Business = () => {
   return (
@@ -14,10 +15,7 @@ const Business = () => {
         <div className="" style={{ padding: 0, width: "15vw" }}>
           <NavBar />
         </div>
-        <div
-          className="d-flex flex-column align-items-center"
-          style={{ width: "85vw" }}
-        >
+        <div className="d-flex flex-column align-items-center w-100">
           <Outlet />
         </div>
       </div>

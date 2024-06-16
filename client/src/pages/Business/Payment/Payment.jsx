@@ -1,4 +1,3 @@
-import "./Payment.css";
 import React from "react";
 
 const Payment = () => {
@@ -7,7 +6,7 @@ const Payment = () => {
       className="mt-5 p-5 rounded-3 w-50 shadow-sm d-flex flex-column align-items-center"
       style={{ background: "white" }}
     >
-      <table class="table table-hover table-striped">
+      <table class="table text-center table-hover table-striped">
         <thead class="thead-dark">
           <tr>
             <th scope="col">Id</th>
@@ -37,7 +36,7 @@ const Payment = () => {
           </tr>
         </tbody>
       </table>
-      <div className="">Total = 600</div>
+      <div className="align-self-end fw-semibold">Total = 600</div>
     </div>
   );
 };
