@@ -7,11 +7,17 @@ const Business = () => {
   return (
     <div>
       <Header />
-      <div className="container-fluid row ">
-        <div className="col-2" style={{ padding: 0 }}>
+      <div
+        className="container-fluid d-flex "
+        style={{ padding: 0, margin: 0 }}
+      >
+        <div className="" style={{ padding: 0, width: "15vw" }}>
           <NavBar />
         </div>
-        <div className="col-10">
+        <div
+          className="d-flex flex-column align-items-center"
+          style={{ width: "85vw" }}
+        >
           <Outlet />
         </div>
       </div>

@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Business from "../pages/Business/Business";
 import NavBar from "../pages/Business/components/NavBar";
 import Orders from "../pages/Business/Orders/Orders";
+import Payments from "../pages/Business/Payments/Payments";
 
 const HomeRouter = () => {
   return (
@@ -33,7 +34,7 @@ const HomeRouter = () => {
           <Route path="services" element={"Business Services List"} />
           <Route path="add-product" element={"Business add product page"} />
           <Route path="add-service" element={"Business add service page"} />
-          <Route path="payments" element={"Business payments page"} />
+          <Route path="payments" element={"Business Payments page"} />
           <Route path="profile" element={"Business profile page"} />
           <Route path="reviews" element={"Business reviews page"} />
         </Route>

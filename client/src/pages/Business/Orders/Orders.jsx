@@ -3,7 +3,9 @@ import Order from "./Order";
 
 const Orders = () => {
   return (
-    <div>
+    <div className="d-flex flex-column gap-3 my-3">
+      <Order />
+      <Order />
       <Order />
     </div>
   );
