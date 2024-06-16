@@ -4,15 +4,16 @@ import Business from "../pages/Business/Business";
 import NavBar from "../pages/Business/components/NavBar";
 import Orders from "../pages/Business/Orders/Orders";
 import Login from "../pages/User/components/UserAuth/Login";
-import Register from "../pages/User/components/UserAuth/Registration"
+import Register from "../pages/User/components/UserAuth/Registration";
+import Payments from "../pages/Business/Payments/Payments";
 
 const HomeRouter = () => {
   return (
     <div>
       <Routes>
         {/* Home route */}
-        <Route path="/" element={<Login/>} />
-        <Route path='/register' element ={<Register/>}/>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         {/* Customer side routes */}
         <Route path="customer">
           <Route path="" element={"Customer Home"} />
@@ -35,7 +36,7 @@ const HomeRouter = () => {
           <Route path="services" element={"Business Services List"} />
           <Route path="add-product" element={"Business add product page"} />
           <Route path="add-service" element={"Business add service page"} />
-          <Route path="payments" element={"Business payments page"} />
+          <Route path="payments" element={"Business Payments page"} />
           <Route path="profile" element={"Business profile page"} />
           <Route path="reviews" element={"Business reviews page"} />
         </Route>
