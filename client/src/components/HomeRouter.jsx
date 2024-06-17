@@ -6,6 +6,7 @@ import Login from "../pages/User/components/UserAuth/Login";
 import Register from "../pages/User/components/UserAuth/Registration";
 import Profile from "../pages/Business/Profile/Profile";
 import Payment from "../pages/Business/Payment/Payment";
+import Catalogue from "../pages/Business/Catalogue/Catalogue";
 
 const HomeRouter = () => {
   return (
@@ -32,8 +33,8 @@ const HomeRouter = () => {
         <Route path="business" element={<Business />}>
           <Route path="signup" element={"Business signup"} />
           <Route path="orders" element={<Orders />} />
-          <Route path="products" element={"Business Products List"} />
-          <Route path="services" element={"Business Services List"} />
+          <Route path="products" element={<Catalogue />} />
+          <Route path="services" element={<Catalogue />} />
           <Route path="add-product" element={"Business add product page"} />
           <Route path="add-service" element={"Business add service page"} />
           <Route path="payments" element={<Payment />} />

@@ -47,7 +47,7 @@ const NavBar = () => {
               <Link
                 className={
                   item.name.toLowerCase() == pathName
-                    ? "nav-link"
+                    ? "nav-link link-primary"
                     : "nav-link link-dark"
                 }
                 aria-current="page"
