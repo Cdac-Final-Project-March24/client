@@ -7,6 +7,7 @@ export default function Login() {
             <div className="card p-4 shadow-sm" style={{ maxWidth: '400px', width: '100%' }}>
                 <h2 className="text-center mb-4">Registration</h2>
                 <form>
+                    
 
                     <div className="form-group">
                         <label htmlFor="name">Name</label>

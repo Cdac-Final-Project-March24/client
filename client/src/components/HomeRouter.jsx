@@ -3,9 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import Business from "../pages/Business/Business";
 import NavBar from "../pages/Business/components/NavBar";
 import Orders from "../pages/Business/Orders/Orders";
-import Login from "../pages/User/components/UserAuth/Login";
-import Register from "../pages/User/components/UserAuth/Registration"
-
+import Login from "../pages/User/UserAuth/Login";
+import Register from "../pages/User/UserAuth/Registration"
+import Home from "../pages/User/UserScreens/HomePage";
 const HomeRouter = () => {
   return (
     <div>
@@ -15,7 +15,7 @@ const HomeRouter = () => {
         <Route path='/register' element ={<Register/>}/>
         {/* Customer side routes */}
         <Route path="customer">
-          <Route path="" element={"Customer Home"} />
+          <Route path="" element={<Home/>} />
           <Route path="listing" element={"Listing of products or services"} />
           {/* Dynamic routes */}
           <Route path=":business">
