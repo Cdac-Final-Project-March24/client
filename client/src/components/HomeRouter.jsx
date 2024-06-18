@@ -11,11 +11,13 @@ const HomeRouter = () => {
     <div>
       <Routes>
         {/* Home route */}
-        <Route path="/" element={<Login/>} />
-        <Route path='/register' element ={<Register/>}/>
+        <Route path="/" element={"Home Page to be decided"} />
+        <Route path='/register' element={"Register Page to be Decided"} />
         {/* Customer side routes */}
         <Route path="customer">
-          <Route path="" element={<Home/>} />
+          <Route path="" element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path='register' element={<Register />} />
           <Route path="listing" element={"Listing of products or services"} />
           {/* Dynamic routes */}
           <Route path=":business">
