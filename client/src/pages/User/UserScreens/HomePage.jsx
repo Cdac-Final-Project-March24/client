@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import image from '../../../Images/Logo.jpeg'
 
 const Home = () => {
   const [location, setLocation] = useState({ area: 'Unknown', city: 'Unknown' });
@@ -42,40 +43,40 @@ const Home = () => {
 
   return (
     <div className="container " style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', borderRadius: '10px', padding: '20px', minHeight: '100vh' }}>
-     <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4" style={{ borderRadius: '10px' }}>
-  <div className="container">
- 
-    
+      <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4" style={{ borderRadius: '10px' }}>
+        <div className="container">
 
-   
-    <div className="collapse navbar-collapse justify-content-center">
-      <ul className="navbar-nav mb-2 mb-lg-0">
-        <li className="nav-item">
-          <span className="nav-link">
-            <i className="fas fa-map-marker-alt me-1"></i> {location.area}, {location.city}
-          </span>
-        </li>
-      </ul>
 
-      <div style={{marginLeft:"300px"}}>
-      <a className="navbar-brand d-flex align-items-center" href="#">
-        <img height="30" width="30" src="src/Images/Logo.jpeg" className="d-inline-block align-top me-2" alt="" />
-        <span className="h4 mb-0">HomeBazzar</span>
-      </a>
-    </div>
 
-      <form className="d-flex ms-auto">
-        <input
-          className="form-control me-2"
-          type="search"
-          placeholder="Search for products and services Nearby"
-          aria-label="Search"
-        />
-        <button className="btn btn-outline-primary" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
+
+          <div className="collapse navbar-collapse justify-content-center">
+            <ul className="navbar-nav mb-2 mb-lg-0">
+              <li className="nav-item">
+                <span className="nav-link">
+                  <i className="fas fa-map-marker-alt me-1"></i> {location.area}, {location.city}
+                </span>
+              </li>
+            </ul>
+
+            <div style={{ marginLeft: "300px" }}>
+              <a className="navbar-brand d-flex align-items-center" href="#">
+                <img height="30" width="30" src={image} className="d-inline-block align-top me-2" alt="" />
+                <span className="h4 mb-0">HomeBazzar</span>
+              </a>
+            </div>
+
+            <form className="d-flex ms-auto">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search for products and services Nearby"
+                aria-label="Search"
+              />
+              <button className="btn btn-outline-primary" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
 
 
       <div className="row mb-4">
