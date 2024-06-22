@@ -1,5 +1,6 @@
 import React from 'react';
 import image from './Logo.jpeg'
+import { Link } from 'react-router-dom';
 
 
 export default function Login() {
@@ -26,6 +27,7 @@ export default function Login() {
                             </div>
                             <div className="text-center">
                                 <button type="submit" className="btn btn-primary btn-block mt-3">Sign In</button>
+                                <p className='mt-2'>Not registered yet,<Link to="/customer/register">Register Here</Link></p>
                             </div>
                         </form>
                     </div>

@@ -20,3 +20,10 @@ body {
     background: rgba(255, 255, 255, 0.9); /* White background with transparency for the cards */
   }
   
+
+  .divider {
+    height: 100%; /* Full height of the parent container */
+    width: 2px; /* Thickness of the divider */
+    background-color: #000; /* Color of the divider */
+    margin: 0 auto; /* Center the divider within the column */
+}

@@ -1,11 +1,17 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Business from "../pages/Business/Business";
-import NavBar from "../pages/Business/components/NavBar";
 import Orders from "../pages/Business/Orders/Orders";
 import Login from "../pages/User/UserAuth/Login";
 import Register from "../pages/User/UserAuth/Registration"
 import Home from "../pages/User/UserScreens/HomePage";
+import ProductListPage from "../pages/User/UserScreens/ProductListPage";
+import ServiceListPage from "../pages/User/UserScreens/ServiceListPage";
+import BusinessPage from "../pages/User/UserScreens/BusinessPage/BusinessPage";
+import ProductPage from "../pages/User/UserScreens/ProductPage/ProductPage"
+import ServicePage from "../pages/User/UserScreens/ServicePage/ServicePage";
+import Cart from "../pages/User/UserScreens/Cart"
+import CheckOut from "../pages/User/UserScreens/Checkout/Checkout"
 const HomeRouter = () => {
   return (
     <div>
@@ -18,15 +24,18 @@ const HomeRouter = () => {
           <Route path="" element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path='register' element={<Register />} />
-          <Route path="listing" element={"Listing of products or services"} />
+          <Route path="listing">
+            <Route path="ProductList" element={<ProductListPage />} />
+            <Route path="ServiceList" element={<ServiceListPage />} />
+          </Route>
           {/* Dynamic routes */}
           <Route path=":business">
-            <Route path="" element={"Business home"} />
-            <Route path="service/:service" element={"Service home"} />
-            <Route path="product/:product" element={"Product home"} />
+            <Route path="" element={<BusinessPage/>} />
+            <Route path="service/:service" element={<ServicePage/>} />
+            <Route path="product/:product" element={<ProductPage/>} />
           </Route>
-          <Route path="cart" element={"Customer Cart"} />
-          <Route path="checkout" element={"Customer Checkout"} />
+          <Route path="cart" element={<Cart/>} />
+          <Route path="checkout" element={<CheckOut/>} />
         </Route>
 
         {/* Business side rutes */}
