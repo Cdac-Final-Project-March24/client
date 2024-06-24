@@ -1,6 +1,5 @@
 import "./App.css";
 import HomeRouter from "./components/HomeRouter";
-import "bootstrap-icons/font/bootstrap-icons.css";
 
 function App() {
   return (
