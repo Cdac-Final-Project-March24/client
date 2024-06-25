@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar1";
 import { useState } from "react";
-import OverView from "../ProductPage/Overview";
-import Review from "../ProductPage/Review";
-import OrderOnline from "../ProductPage/OrderOnline";
+import OverView from "./OverViewS";
+import Review from "./ReviewS";
+import OrderOnline from "./OrderOnlineS";
 
 const ServicePage = () => {
 

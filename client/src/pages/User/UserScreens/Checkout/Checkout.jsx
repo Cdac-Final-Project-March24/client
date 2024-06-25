@@ -1,8 +1,13 @@
 import React from 'react';
 import Navbar from "../../components/Navbar1";
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import PayPal from "./PayPal"
+import UPI from "./UPI"
+import DebitCard from "./DebitCard"
 
 const Checkout = () => {
+    const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
 
     const cartItems = [
         { name: 'Product 1', price: 20 },
@@ -12,6 +17,19 @@ const Checkout = () => {
     ];
 
     const deliveryCost = 5.00;
+
+    const renderPaymentMethod = () => {
+        switch (selectedPaymentMethod) {
+            case 'PayPal':
+                return <PayPal />;
+            case 'DebitCard':
+                return <DebitCard />;
+            case 'UPI':
+                return <UPI />;
+            default:
+                return <h5>Please select a payment method</h5>;
+        }
+    };
 
     return (
         <div>
@@ -23,12 +41,27 @@ const Checkout = () => {
                             <div className="card-body">
                                 <h5 className="card-title">Select Payment Method:</h5>
                                 <div className="d-grid gap-2">
-                                    <button className="btn btn-light btn-lg mb-2">PayPal</button>
-                                    <button className="btn btn-light btn-lg mb-2">Debit Card</button>
-                                    <button className="btn btn-light btn-lg mb-2">UPI</button>
+                                    <button
+                                        className="btn btn-light btn-lg mb-2"
+                                        onClick={() => setSelectedPaymentMethod('PayPal')}
+                                    >
+                                        PayPal
+                                    </button>
+                                    <button
+                                        className="btn btn-light btn-lg mb-2"
+                                        onClick={() => setSelectedPaymentMethod('DebitCard')}
+                                    >
+                                        Debit Card
+                                    </button>
+                                    <button
+                                        className="btn btn-light btn-lg mb-2"
+                                        onClick={() => setSelectedPaymentMethod('UPI')}
+                                    >
+                                        UPI
+                                    </button>
                                 </div>
                                 <div className="selected-payment">
-                                    <h5>Selected Payment Method UI</h5>
+                                    {renderPaymentMethod()}
                                 </div>
                             </div>
                         </div>

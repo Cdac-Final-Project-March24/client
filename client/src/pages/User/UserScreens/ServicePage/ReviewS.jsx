@@ -1,35 +1,35 @@
 import React from 'react';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const reviews = [
     {
         id: 1,
         name: 'John Doe',
-        rating: 5,
-        comment: 'Excellent product, highly recommended!',
+        rating: 4,
+        comment: 'Great service, very professional!',
     },
     {
         id: 2,
         name: 'Jane Smith',
-        rating: 4,
-        comment: 'Good product, but could be better.',
+        rating: 5,
+        comment: 'Excellent service, exceeded my expectations.',
     },
     {
         id: 3,
         name: 'Alice Johnson',
         rating: 3,
-        comment: 'Average product, nothing special.',
+        comment: 'Average service, could be better.',
     },
     {
         id: 4,
         name: 'Michael Brown',
         rating: 5,
-        comment: 'Outstanding quality and performance!',
+        comment: 'Highly recommended! Fast and reliable.',
     },
     // Add more reviews as needed
 ];
 
-const Review = () => {
+const ServiceReview = () => {
     return (
         <div className="container my-4">
             <h5 className="mb-4">Product Reviews</h5>
@@ -71,4 +71,4 @@ const renderStars = (rating) => {
     return starArray;
 };
 
-export default Review;
+export default ServiceReview;

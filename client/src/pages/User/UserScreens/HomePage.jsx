@@ -116,7 +116,7 @@ const Home = () => {
                   className="card-body"
                   style={{ backgroundColor: "skyblue" }}
                 >
-                  <h5 className="card-title text-primary">{product.name}</h5>
+                  <h5 className="card-title text">{product.name}</h5>
                   <p className="card-text">{product.description}</p>
                 </div>
               </div>
@@ -144,7 +144,7 @@ const Home = () => {
                   className="card-body"
                   style={{ backgroundColor: "skyblue" }}
                 >
-                  <h5 className="card-title text-primary">{service.name}</h5>
+                  <h5 className="card-title text">{service.name}</h5>
                   <p className="card-text">{service.description}</p>
                 </div>
               </div>
@@ -172,7 +172,7 @@ const Home = () => {
                   className="card-body"
                   style={{ backgroundColor: "skyblue" }}
                 >
-                  <h5 className="card-title text-primary">{business.name}</h5>
+                  <h5 className="card-title text">{business.name}</h5>
                   <p className="card-text">{business.description}</p>
                 </div>
               </div>

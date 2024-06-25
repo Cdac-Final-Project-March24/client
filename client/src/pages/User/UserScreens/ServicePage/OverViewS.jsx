@@ -1,31 +1,31 @@
 import React from 'react';
 
 
-const productDetails = {
-    name: 'Product Name',
-    description: 'This is a detailed description of the product. It includes features, specifications, and benefits.',
+const serviceDetails = {
+    name: 'Service Name',
+    description: 'This is a detailed description of the service. It includes features, specifications, and benefits.',
     benefits: [
-        'Benefit 1: Describe the first benefit of the product.',
-        'Benefit 2: Explain another benefit of the product.',
+        'Benefit 1: Describe the first benefit of the service.',
+        'Benefit 2: Explain another benefit of the service.',
         'Benefit 3: Highlight a key advantage or unique feature.',
     ],
-    customerRating: 4.5,
-    functionality: 'Explain the basic functionality and use cases of the product.',
-    usefulness: 'Discuss how the product solves customer problems or improves their experience.',
+    customerRating: 4.2,
+    functionality: 'Explain the basic functionality and use cases of the service.',
+    usefulness: 'Discuss how the service solves customer problems or improves their experience.',
 };
 
-const OverView = () => {
+const ServiceOverview = () => {
     return (
         <div className="container my-4">
-            <h5 className="mb-4">{productDetails.name} Overview</h5>
+            <h5 className="mb-4">{serviceDetails.name} Overview</h5>
             <div className="card">
                 <div className="card-body">
-                    <h6 className="card-title">Product Description</h6>
-                    <p className="card-text">{productDetails.description}</p>
+                    <h6 className="card-title">Service Description</h6>
+                    <p className="card-text">{serviceDetails.description}</p>
 
                     <h6 className="card-title mt-4">Key Benefits</h6>
                     <ul className="list-group">
-                        {productDetails.benefits.map((benefit, index) => (
+                        {serviceDetails.benefits.map((benefit, index) => (
                             <li className="list-group-item" key={index}>{benefit}</li>
                         ))}
                     </ul>
@@ -34,17 +34,17 @@ const OverView = () => {
                         <h6 className="card-title">Customer Rating</h6>
                         <div className="d-flex align-items-center">
                             <div className="mr-2">
-                                {renderStars(productDetails.customerRating)}
+                                {renderStars(serviceDetails.customerRating)}
                             </div>
-                            <span>({productDetails.customerRating.toFixed(1)})</span>
+                            <span>({serviceDetails.customerRating.toFixed(1)})</span>
                         </div>
                     </div>
 
                     <h6 className="card-title mt-4">Functionality</h6>
-                    <p className="card-text">{productDetails.functionality}</p>
+                    <p className="card-text">{serviceDetails.functionality}</p>
 
                     <h6 className="card-title mt-4">Usefulness</h6>
-                    <p className="card-text">{productDetails.usefulness}</p>
+                    <p className="card-text">{serviceDetails.usefulness}</p>
                 </div>
             </div>
         </div>
@@ -71,4 +71,4 @@ const renderStars = (rating) => {
     return starArray;
 };
 
-export default OverView;
+export default ServiceOverview;

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import image from "../../../Images/Logo.jpeg"
+import image2 from "../../../Images/profile.png"
 const Navbar = () => {
     const [location, setLocation] = useState({ area: 'Unknown', city: 'Unknown' });
 
@@ -45,7 +46,7 @@ const Navbar = () => {
                         />
                         <button className="btn btn-outline-primary" type="submit">Search</button>
                     </form>
-                    <div className="ms-2"><img src="https://via.placeholder.com/30" alt="" height={40} width={40} className="rounded-circle"/> UserName</div>
+                    <div className="ms-2"><img src={image2} alt="" height={40} width={40} className="rounded-circle"/> UserName</div>
                 </div>
             </div>
         </nav>

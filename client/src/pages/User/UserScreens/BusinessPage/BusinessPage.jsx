@@ -63,10 +63,10 @@ const BusinessPage = () => {
                     </p>
                 </div>
                 <div className="row mt-4">
-                    <div className="col-md-5">
+                    <div className="col-md-3">
                         <SideNav onNavItemClick={handleNavItemClick} />
                     </div>
-                    <div className="col-md-7">
+                    <div className="col-md-9">
                         {componentRender()}
                     </div>
                 </div>

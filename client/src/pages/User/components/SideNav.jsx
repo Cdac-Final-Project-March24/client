@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'; // If using React Router for navigation
 
 const SideNav = ({ onNavItemClick }) => {
     return (
-        <div className="col-md-5">
+        <div className="col-md-3">
             <div className="sticky-top pt-3">
                 <ul className="nav flex-column">
                     <li className="nav-item mb-2">
