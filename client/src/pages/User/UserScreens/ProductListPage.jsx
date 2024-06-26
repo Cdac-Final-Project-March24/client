@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Business from "../../Business/Business";
 import Navbar from "../components/Navbar1";
 const ProductListPage = () => {
@@ -35,7 +36,7 @@ const ProductListPage = () => {
                                     <div className="card-body" style={{backgroundColor:"skyblue"}}>
                                         <h5 className="card-title">{bussiness.name}</h5>
                                         <p className="card-text">{bussiness.description}</p>
-                                        <a href="#" className="btn btn-primary">Go to {bussiness.name} page</a>
+                                        <Link to="#" className="btn btn-primary">Go to {bussiness.name} page</Link>
                                     </div>
                                 </div>
                             </div>
