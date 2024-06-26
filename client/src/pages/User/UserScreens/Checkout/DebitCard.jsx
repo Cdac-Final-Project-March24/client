@@ -7,7 +7,6 @@ const DebitCard = () => {
     const [cvv, setCvv] = useState('');
 
     const handlePayment = () => {
-        // Handle payment logic here
         alert(`Proceeding with payment for card: ${cardNumber}`);
     };
 
