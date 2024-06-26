@@ -17,6 +17,7 @@ import ProductPage from "../pages/User/UserScreens/ProductPage/ProductPage";
 import ServicePage from "../pages/User/UserScreens/ServicePage/ServicePage";
 import Cart from "../pages/User/UserScreens/Cart";
 import CheckOut from "../pages/User/UserScreens/Checkout/Checkout";
+import Reviews from "../pages/Business/Reviews/Reviews";
 const HomeRouter = () => {
   return (
     <div>
@@ -53,7 +54,7 @@ const HomeRouter = () => {
           <Route path="add-service" element={"Business add service page"} />
           <Route path="payments" element={<Payment />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="reviews" element={"Business reviews page"} />
+          <Route path="reviews" element={<Reviews />} />
         </Route>
       </Routes>
     </div>
