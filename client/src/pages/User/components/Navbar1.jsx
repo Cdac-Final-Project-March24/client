@@ -19,7 +19,7 @@ const Navbar = () => {
   }, []);
   return (
     <nav
-      className="navbar navbar-expand-lg navbar-light bg-light mb-4 sticky-top"
+      className="navbar container shadow-sm navbar-expand-lg navbar-light bg-light mb-4 sticky-top"
       style={{ borderRadius: "10px" }}
     >
       <div className="container">
@@ -40,7 +40,7 @@ const Navbar = () => {
             </a>
           </div>
 
-          <form className="d-flex ms-auto">
+          <form className="d-flex ms-auto ">
             <input
               className="form-control me-2"
               type="search"

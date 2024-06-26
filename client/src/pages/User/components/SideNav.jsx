@@ -4,10 +4,10 @@ import { Link } from "react-router-dom"; // If using React Router for navigation
 const SideNav = ({ onNavItemClick }) => {
   return (
     <div
-      className="col-md-3 border w-75 shadow-sm"
-      style={{ position: "sticky", left: 0, top: "10vh", background: "white" }}
+      className="col-md-3 w-100  rounded-3 mt-4"
+      style={{ position: "sticky", left: 0, top: "12vh" }}
     >
-      <div className="sticky-top pt-3">
+      <div className="sticky-top py-3">
         <ul className="nav flex-column">
           <li className="nav-item mb-2">
             <Link

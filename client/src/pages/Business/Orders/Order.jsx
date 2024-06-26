@@ -33,7 +33,7 @@ const Order = () => {
           <div className="col">Total bill</div>
           <div className="col">900/-</div>
         </div>
-        <button className="btn btn-secondary w-100 mt-2">Ready</button>
+        <button className="btn btn-primary w-100 mt-2">Ready</button>
       </div>
       <div className="col">
         <div style={{ color: "green" }}>

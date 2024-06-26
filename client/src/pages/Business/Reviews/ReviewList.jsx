@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const ReviewList = () => {
   const [currItem, setCurrItem] = useState(0);

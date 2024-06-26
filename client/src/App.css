@@ -1,5 +1,25 @@
 .app {
   background-color: var(--bg);
+  min-height: 100vh;
 }
 
+.control-btn button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: xx-large;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.control-btn .next {
+  position: absolute;
+  top: 45%;
+  right: 0;
+}
 
+.control-btn .prev {
+  position: absolute;
+  top: 45%;
+  left: 0;
+  z-index: 99;
+}
