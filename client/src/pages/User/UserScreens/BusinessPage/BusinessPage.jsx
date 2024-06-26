@@ -64,7 +64,7 @@ const BusinessPage = () => {
           </p>
         </div>
         <hr />
-        <div className="row mt-4">
+        <div className="row mt-3">
           <div className="col-md-2">
             <SideNav onNavItemClick={handleNavItemClick} />
           </div>
