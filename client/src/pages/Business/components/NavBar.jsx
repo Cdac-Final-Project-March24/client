@@ -46,7 +46,7 @@ const NavBar = () => {
             <li className="nav-item" key={index}>
               <Link
                 className={
-                  item.name.toLowerCase() == pathName
+                  item.name.toLowerCase() === pathName
                     ? "nav-link link-primary"
                     : "nav-link link-dark"
                 }

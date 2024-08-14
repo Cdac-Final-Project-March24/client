@@ -20,7 +20,7 @@ export default function Login() {
     } else {
       const result = await login(email, password);
       console.log(result);
-      if (result != null && result.status === 201) {
+      if (result.status === 201) {
         // read the token
         // set the data in session storage
         sessionStorage.setItem("token", result["jwt"]);

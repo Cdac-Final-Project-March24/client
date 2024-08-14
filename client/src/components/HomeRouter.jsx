@@ -21,6 +21,7 @@ import Reviews from "../pages/Business/Reviews/Reviews";
 import UserProfile from "../pages/User/UserScreens/UserProfile";
 import Admin from "../pages/User/components/Admin";
 import ProtectedRoute from "./ProtectedRoute";
+import RegisterBusiness from "../pages/Business/Register/RegisterBusiness";
 const HomeRouter = () => {
   return (
     <div>
@@ -52,10 +53,10 @@ const HomeRouter = () => {
 
           {/* Business side rutes */}
           <Route path="business" element={<Business />}>
-            <Route path="signup" element={"Business signup"} />
+            <Route path="register" element={<RegisterBusiness />} />
             <Route path="orders" element={<Orders />} />
-            <Route path="products" element={<Catalogue />} />
-            <Route path="services" element={<Catalogue />} />
+            <Route path="products" element={<Catalogue type={"product"} />} />
+            <Route path="services" element={<Catalogue type={"service"} />} />
             <Route path="add-product" element={"Business add product page"} />
             <Route path="add-service" element={"Business add service page"} />
             <Route path="payments" element={<Payment />} />

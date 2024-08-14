@@ -1,19 +1,20 @@
 import React from "react";
 import NavBar from "./components/NavBar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import "./Business.css";
 
 const Business = () => {
+  const isRegisterPage = useLocation().pathname.substring(10) === "register";
   return (
     <div>
-      <Header />
+      {isRegisterPage || <Header />}
       <div
         className="container-fluid d-flex "
         style={{ padding: 0, margin: 0 }}
       >
         <div className="" style={{ padding: 0, width: "15vw" }}>
-          <NavBar />
+          {isRegisterPage || <NavBar />}
         </div>
         <div className="d-flex flex-column align-items-center w-100">
           <Outlet />
