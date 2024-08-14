@@ -19,14 +19,12 @@ export default function Login() {
       toast.warning("enter password");
     } else {
       const result = await login(email, password);
-      if (result.status === 201) {
+      console.log(result);
+      if (result != null && result.status === 201) {
         // read the token
-        // const token = result['data']['token']
-        const token = result["jwt"];
-
         // set the data in session storage
-        // sessionStorage.token = token
-        sessionStorage.setItem("token", token);
+        sessionStorage.setItem("token", result["jwt"]);
+        sessionStorage.setItem("email", result["email"]);
 
         toast.success("welcome to the application");
         navigate("/customer");
