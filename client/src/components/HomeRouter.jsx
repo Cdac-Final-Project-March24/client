@@ -18,6 +18,8 @@ import ServicePage from "../pages/User/UserScreens/ServicePage/ServicePage";
 import Cart from "../pages/User/UserScreens/Cart";
 import CheckOut from "../pages/User/UserScreens/Checkout/Checkout";
 import Reviews from "../pages/Business/Reviews/Reviews";
+import UserProfile from "../pages/User/UserScreens/UserProfile";
+import Admin from "../pages/User/components/Admin";
 const HomeRouter = () => {
   return (
     <div>
@@ -25,11 +27,13 @@ const HomeRouter = () => {
         {/* Home route */}
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/admin" element={<Admin />} />
         {/* Customer side routes */}
         <Route path="customer">
           <Route path="" element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="profile" element={<UserProfile />} />
           <Route path="listing">
             <Route path="ProductList" element={<ProductListPage />} />
             <Route path="ServiceList" element={<ServiceListPage />} />
@@ -62,3 +66,4 @@ const HomeRouter = () => {
 };
 
 export default HomeRouter;
+
