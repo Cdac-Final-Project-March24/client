@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from "../../components/Navbar1";
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import PayPal from "./PayPal"
-import UPI from "./UPI"
-import DebitCard from "./DebitCard"
+import PayPal from "./PayPal";
+import UPI from "./UPI";
+import DebitCard from "./DebitCard";
 
 const Checkout = () => {
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
-
-    const cartItems = [
-        { name: 'Product 1', price: 20 },
-        { name: 'Product 2', price: 30 },
-        { name: 'Service 1', price: 15 },
-        { name: 'Service 2', price: 25 },
-    ];
-
+    const [cartItems, setCartItems] = useState([]);
     const deliveryCost = 5.00;
+
+    useEffect(() => {
+        // Retrieve cart items from localStorage
+        const savedCartItems = localStorage.getItem('cartItems');
+        if (savedCartItems) {
+            setCartItems(JSON.parse(savedCartItems));
+        }
+    }, []);
 
     const renderPaymentMethod = () => {
         switch (selectedPaymentMethod) {
@@ -29,6 +29,10 @@ const Checkout = () => {
             default:
                 return <h5>Please select a payment method</h5>;
         }
+    };
+
+    const calculateTotal = () => {
+        return cartItems.reduce((acc, item) => acc + (item.Quantity * parseFloat(item.pricePayable.replace('$', ''))), 0) + deliveryCost;
     };
 
     return (
@@ -73,7 +77,7 @@ const Checkout = () => {
                                 {cartItems.map((item, index) => (
                                     <div className="d-flex justify-content-between mb-2" key={index}>
                                         <span>{item.name}</span>
-                                        <span>${item.price.toFixed(2)}</span>
+                                        <span>${(item.Quantity * parseFloat(item.pricePayable.replace('$', ''))).toFixed(2)}</span>
                                     </div>
                                 ))}
                                 <div className="d-flex justify-content-between mb-2">
@@ -82,7 +86,7 @@ const Checkout = () => {
                                 </div>
                                 <div className="d-flex justify-content-between">
                                     <span>Total:</span>
-                                    <span>${(cartItems.reduce((acc, item) => acc + item.price, 0) + deliveryCost).toFixed(2)}</span>
+                                    <span>${calculateTotal().toFixed(2)}</span>
                                 </div>
                                 <div className="mt-3">
                                     <Link to="/customer/cart" className="btn btn-primary btn-lg w-100">Update Cart</Link>

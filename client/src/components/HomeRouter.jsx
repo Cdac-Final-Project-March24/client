@@ -35,8 +35,9 @@ const HomeRouter = () => {
           <Route path="register" element={<Register />} />
           <Route path="profile" element={<UserProfile />} />
           <Route path="listing">
-            <Route path="ProductList" element={<ProductListPage />} />
-            <Route path="ServiceList" element={<ServiceListPage />} />
+            {/* Dynamic Routes */}
+            <Route path="product/:product" element={<ProductListPage />} />
+            <Route path="service/:service" element={<ServiceListPage />} />
           </Route>
           {/* Dynamic routes */}
           <Route path=":business">
