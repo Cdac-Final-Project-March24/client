@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Business from "../../Business/Business";
 import Navbar from "../components/Navbar1";
 const ProductListPage = () => {
@@ -18,13 +18,13 @@ const ProductListPage = () => {
         { name: 'Business 12', description: 'Description of Business 12', image: 'https://via.placeholder.com/150' },
     ];
 
-
+    const {product} = useParams();
     return (
         <>
             <Navbar />
             <div className="container">
 
-                <h1 style={{ textAlign: "center" }}>Best Results for {`<Product Name>`}</h1>
+                <h1 style={{ textAlign: "center" }}>Best Results for Product : {product}</h1>
                 <div className="row mt-2">
                     {
                         topBusinesses.map((bussiness, index) => {
@@ -36,7 +36,7 @@ const ProductListPage = () => {
                                     <div className="card-body" style={{backgroundColor:"skyblue"}}>
                                         <h5 className="card-title">{bussiness.name}</h5>
                                         <p className="card-text">{bussiness.description}</p>
-                                        <Link to="#" className="btn btn-primary">Go to {bussiness.name} page</Link>
+                                        <Link to={`/customer/${bussiness.name}`} className="btn btn-primary">Go to {bussiness.name} page</Link>
                                     </div>
                                 </div>
                             </div>

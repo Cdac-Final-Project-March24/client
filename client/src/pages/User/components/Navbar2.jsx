@@ -11,14 +11,24 @@ const Navbar = () => {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        setLocation({
-          area: "Central Park",
-          city: "New York",
-        });
+        const { latitude, longitude } = position.coords;
+
+        // Fetch location data from a reverse geocoding API
+        fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`)
+          .then(response => response.json())
+          .then(data => {
+            // Set the city and state from the response
+            setLocation({
+              area: data.locality || "Unknown",
+              city: data.principalSubdivision || "Unknown"
+            });
+          })
+          .catch(error => {
+            console.error("Error fetching location data:", error);
+          });
       });
     }
   }, []);
-
   return (
     <nav
       className="navbar container shadow-sm navbar-expand-lg navbar-light bg-light mb-4 sticky-top"

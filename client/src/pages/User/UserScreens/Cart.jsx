@@ -1,39 +1,15 @@
-import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar1";
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar1';
+import { CartContext } from '../../../../src/components/CartContext'; // Import CartContext
 
 const Cart = () => {
-  const cartItems = [
-    {
-      name: "Product Name",
-      Quantity: 1,
-      pricePayable: "$24",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      name: "Service Name",
-      Quantity: 1,
-      pricePayable: "$24",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      name: "Product Name",
-      Quantity: 1,
-      pricePayable: "$24",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      name: "Service Name",
-      Quantity: 1,
-      pricePayable: "$24",
-      image: "https://via.placeholder.com/150",
-    },
-  ];
+  const { cart, removeFromCart, addToCart } = useContext(CartContext); // Access cart, removeFromCart, and addToCart from context
 
-  // Function to calculate subtotal of cart items
   const calculateSubtotal = () => {
-    return cartItems
+    return cart
       .reduce(
-        (acc, item) => acc + parseFloat(item.pricePayable.replace("$", "")),
+        (acc, item) => acc + parseFloat(item.Quantity * item.pricePayable.replace('$', '')),
         0
       )
       .toFixed(2);
@@ -41,6 +17,11 @@ const Cart = () => {
 
   const deliveryCost = 5.0;
   const total = parseFloat(calculateSubtotal()) + deliveryCost;
+
+  const handleProceedToCheckout = () => {
+    // Store cart data in localStorage
+    localStorage.setItem('cartItems', JSON.stringify(cart));
+  };
 
   return (
     <div>
@@ -50,41 +31,53 @@ const Cart = () => {
           {/* Left half of the screen - Cart Items */}
           <div className="col-md-5">
             <div className="row">
-              {cartItems.map((element, index) => (
-                <div className="col-md-6 mb-3" key={index}>
-                  <div className="card" style={{ width: "100%" }}>
-                    <img
-                      src={element.image}
-                      className="card-img-top"
-                      alt="..."
-                    />
-                    <div className="card-body">
-                      <h5 className="card-title">{element.name}</h5>
-                      <p className="card-text">Quantity: {element.Quantity}</p>
-                      <p className="card-text">Cost: {element.pricePayable}</p>
-                      <div className="d-flex justify-content-between">
-                        <button className="btn btn-primary btn-sm">
-                          Remove
-                        </button>
-                        <button className="btn btn-primary btn-sm">
-                          Add More
-                        </button>
+              {cart.length > 0 ? (
+                cart.map((item) => (
+                  <div className="col-md-6 mb-3" key={item.id}>
+                    <div className="card" style={{ width: '100%' }}>
+                      <img
+                        src={item.image}
+                        className="card-img-top"
+                        alt="..."
+                      />
+                      <div className="card-body">
+                        <h5 className="card-title">{item.name}</h5>
+                        <p className="card-text">Quantity: {item.Quantity}</p>
+                        <p className="card-text">Cost: {item.pricePayable}</p>
+                        <div className="d-flex justify-content-between">
+                          {item.Quantity > 1
+                            ? <button className="btn btn-danger btn-sm" onClick={() => removeFromCart(item.id)}>Remove All</button>
+                            : <button className="btn btn-primary btn-sm" onClick={() => removeFromCart(item.id)}>Remove</button>
+                          }
+                          <button
+                            className="btn btn-primary btn-sm"
+                            onClick={() => addToCart({
+                              id: item.productId, // Use the original product ID
+                              name: item.name,
+                              price: parseFloat(item.pricePayable.replace('$', '')),
+                            })}
+                          >
+                            Add More
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p>Your cart is empty.</p>
+              )}
             </div>
           </div>
           {/* Divider line */}
           <div className="col-md-1 d-flex align-items-center justify-content-center">
             <div
-              style={{ height: "100%", borderLeft: "1px solid black" }}
+              style={{ height: '100%', borderLeft: '1px solid black' }}
             ></div>
           </div>
           {/* Right half of the screen - Cart Summary */}
           <div className="col-md-6">
-            <div className="card mt-4 shadow-sm" style={{ padding: "20px" }}>
+            <div className="card mt-4 shadow-sm" style={{ padding: '20px' }}>
               <h5 className="card-title mb-4">Cart Summary</h5>
               <div className="d-flex justify-content-between mb-3">
                 <span>Subtotal:</span>
@@ -102,6 +95,7 @@ const Cart = () => {
               <Link
                 to="/customer/checkout"
                 className="btn btn-success w-100 mt-4"
+                onClick={handleProceedToCheckout}
               >
                 Proceed to Checkout
               </Link>

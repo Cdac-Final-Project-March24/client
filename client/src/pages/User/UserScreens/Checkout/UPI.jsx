@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 
 const UPI = () => {
     const [upiId, setUpiId] = useState('');
     const [amount, setAmount] = useState('');
 
     const handlePayment = () => {
-        alert(`Proceeding with payment for UPI ID: ${upiId} with amount: ${amount}`);
+        toast.info(`Proceeding with payment for UPI ID: ${upiId} with amount: ${amount}`);
     };
 
     return (
@@ -43,6 +44,7 @@ const UPI = () => {
             <p className="mt-3 text-muted">
                 Please ensure that your UPI ID is correct before proceeding.
             </p>
+            <ToastContainer/>
         </div>
     );
 };

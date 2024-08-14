@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 
 const PayPal = () => {
     const [email, setEmail] = useState('');
 
     const handlePayment = () => {
         // Handle payment logic here
-        alert(`Proceeding with payment for PayPal email: ${email}`);
+        toast.info(`Proceeding with payment for PayPal email: ${email}`);
     };
 
     return (
@@ -32,6 +33,7 @@ const PayPal = () => {
             <p className="mt-3 text-muted">
                 Please ensure that your PayPal email is correct before proceeding.
             </p>
+            <ToastContainer/>
         </div>
     );
 };

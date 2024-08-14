@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import Business from "../../Business/Business";
 import Navbar from "../components/Navbar1";
 const ServiceListPage = () => {
@@ -17,13 +18,13 @@ const ServiceListPage = () => {
         { name: 'Business 12', description: 'Description of Business 12', image: 'https://via.placeholder.com/150' },
     ];
 
-
+    const {service} =  useParams();
     return (
         <>
             <Navbar />
             <div className="container">
 
-                <h1 style={{ textAlign: "center" }}>Best Results for {`<Service Name>`}</h1>
+                <h1 style={{ textAlign: "center" }}>Best Results for Service : {service}</h1>
                 <div className="row mt-2">
                     {
                         topBusinesses.map((bussiness, index) => {
@@ -35,7 +36,7 @@ const ServiceListPage = () => {
                                     <div className="card-body" style={{backgroundColor:"skyblue"}}>
                                         <h5 className="card-title">{bussiness.name}</h5>
                                         <p className="card-text">{bussiness.description}</p>
-                                        <a href="#" className="btn btn-primary">Go to {bussiness.name} page</a>
+                                        <a href={`/customer/${bussiness.name}`} className="btn btn-primary">Go to {bussiness.name} page</a>
                                     </div>
                                 </div>
                             </div>

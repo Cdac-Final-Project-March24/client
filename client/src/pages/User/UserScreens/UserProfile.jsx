@@ -58,8 +58,10 @@ const UserProfile = () => {
   };
 
   return (
+    <>
+    <NavBar/>
     <div className="container mt-5">
-        <NavBar/>
+        
       <div className="row justify-content-center">
         <div className="col-md-8">
           {showAlert && <Alert variant="success" className="text-center">User Profile Updated</Alert>}
@@ -153,6 +155,7 @@ const UserProfile = () => {
         </Modal.Footer>
       </Modal>
     </div>
+    </>
   );
 };
 

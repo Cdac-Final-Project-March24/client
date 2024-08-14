@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 
 const DebitCard = () => {
     const [cardNumber, setCardNumber] = useState('');
@@ -7,7 +8,7 @@ const DebitCard = () => {
     const [cvv, setCvv] = useState('');
 
     const handlePayment = () => {
-        alert(`Proceeding with payment for card: ${cardNumber}`);
+        toast.info(`Proceeding with payment for card: ${cardNumber}`);
     };
 
     return (
@@ -67,6 +68,7 @@ const DebitCard = () => {
             <p className="mt-3 text-muted">
                 Please ensure that your card details are correct before proceeding.
             </p>
+            <ToastContainer/>
         </div>
     );
 };

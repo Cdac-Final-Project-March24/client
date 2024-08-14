@@ -64,7 +64,7 @@ const ProductPage = () => {
                         <div>
                             <div className="btn-group">
                                 <button className="btn btn-light ms-2" onClick={()=>{MyComponent("OverView")}}>OverView</button>
-                                <button className="btn btn-light ms-2" onClick={()=>{MyComponent("OrderOnline")}}>Order Online</button>
+                                {/* <button className="btn btn-light ms-2" onClick={()=>{MyComponent("OrderOnline")}}>Order Online</button> */}
                                 <button className="btn btn-light ms-2" onClick={()=>{MyComponent("Review")}}>Product Reviews</button>
                             </div> 
                         </div>
