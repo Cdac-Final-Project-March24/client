@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import image from "../../../Images/Logo.jpeg";
 import adminImage from "../../../Images/profile.png";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [location, setLocation] = useState({
@@ -56,10 +57,10 @@ const Navbar = () => {
           </ul>
 
           <div style={{ marginLeft: "300px" }}>
-            <a className="navbar-brand d-flex align-items-center" href="#">
+            <Link to="/customer" className="navbar-brand d-flex align-items-center" href="#">
               <img height="50" width="50" src={image} alt="Logo" />
               <span className="h4 mb-0">HomeBazzar</span>
-            </a>
+            </Link>
           </div>
 
           <div className="ms-auto d-flex align-items-center">

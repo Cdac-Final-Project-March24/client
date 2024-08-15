@@ -1,34 +1,59 @@
-import React, { useParams,useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { CartContext } from '../../../../components/CartContext'; // Import CartContext
 import { toast, ToastContainer } from 'react-toastify';
 import { getMostPreferredOfferings } from '../../../../services/business'; // Import the service method
+import { addToCart } from '../../../../services/cart'; // Import the Axios service method for adding to cart
 
-const MostPreferredProducts = ({id}) => {
+const MostPreferredProducts = ({ id }) => {
     const [products, setProducts] = useState([]); // State to hold the products
-    const { addToCart } = useContext(CartContext); // Access addToCart from context
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    
     const type = 'MostPreferredProduct'; // Assuming 'PRODUCT' is the type for most preferred products
 
     useEffect(() => {
         const fetchMostPreferredProducts = async () => {
-            const { data, status } = await getMostPreferredOfferings(id, type);
-            if (status === 200) {
-                setProducts(data); // Set the products data from API
-            } else {
-                toast.error('Failed to fetch most preferred products');
+            try {
+                const { data, status } = await getMostPreferredOfferings(id, type);
+                if (status === 200) {
+                    setProducts(data); // Set the products data from API
+                } else {
+                    setError('Failed to fetch most preferred products');
+                }
+            } catch (err) {
+                setError('An error occurred while fetching products');
+            } finally {
+                setLoading(false);
             }
         };
 
         fetchMostPreferredProducts();
     }, [id]);
 
-    const handleAddToCart = (product) => {
-        toast.success(`${product.name} added to cart!`);
-        addToCart(product); // Add product to cart
+    const handleAddToCart = async (product) => {
+        try {
+            // Construct the DTO object
+            const cartDto = {
+                businessId: id,
+                offeringId: product.id,
+                // Add other required fields here if any
+            };
+
+            const { data, status } = await addToCart(cartDto);
+
+            if (status === 201) {
+                toast.success(`${product.name} added to cart!`);
+            } else {
+                toast.error('Failed to add to cart');
+            }
+        } catch (error) {
+            toast.error('An error occurred while adding to cart');
+        }
     };
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
 
     return (
         <div className="container my-4">
@@ -61,7 +86,7 @@ const MostPreferredProducts = ({id}) => {
                     </div>
                 ))}
             </div>
-            <ToastContainer/>
+            <ToastContainer />
         </div>
     );
 };

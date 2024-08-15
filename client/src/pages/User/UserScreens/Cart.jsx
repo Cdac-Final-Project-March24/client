@@ -1,10 +1,36 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link,useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar1';
-import { CartContext } from '../../../../src/components/CartContext'; // Import CartContext
+import { fetchCart } from '../../../services/cart'; // Import fetchCart service method
+import { ToastContainer,toast } from 'react-toastify';
 
 const Cart = () => {
-  const { cart, removeFromCart, addToCart } = useContext(CartContext); // Access cart, removeFromCart, and addToCart from context
+  const [cart, setCart] = useState([]); // State to hold the cart items
+  const [loading, setLoading] = useState(true); // State to handle loading
+  const [error, setError] = useState(null); // State to handle errors
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    const getCart = async () => {
+      try {
+        const { data, status } = await fetchCart();
+        if (status === 200) {
+          setCart(data);
+        } else {
+          toast.error("Cart is empty")
+          setTimeout(()=>{
+            navigate("/customer")
+          },4000)
+        }
+      } catch (error) {
+        setError('An error occurred while fetching the cart');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getCart();
+  }, []);
 
   const calculateSubtotal = () => {
     return cart
@@ -19,9 +45,26 @@ const Cart = () => {
   const total = parseFloat(calculateSubtotal()) + deliveryCost;
 
   const handleProceedToCheckout = () => {
-    // Store cart data in localStorage
     localStorage.setItem('cartItems', JSON.stringify(cart));
   };
+
+  const handleRemoveFromCart = (itemId) => {
+    setCart(prevCart => prevCart.filter(item => item.id !== itemId));
+  };
+
+  const handleAddToCart = (item) => {
+    setCart(prevCart => {
+      const existingItem = prevCart.find(cartItem => cartItem.id === item.id);
+      if (existingItem) {
+        existingItem.Quantity += 1;
+        return [...prevCart];
+      }
+      return [...prevCart, item];
+    });
+  };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
@@ -46,12 +89,12 @@ const Cart = () => {
                         <p className="card-text">Cost: {item.pricePayable}</p>
                         <div className="d-flex justify-content-between">
                           {item.Quantity > 1
-                            ? <button className="btn btn-danger btn-sm" onClick={() => removeFromCart(item.id)}>Remove All</button>
-                            : <button className="btn btn-primary btn-sm" onClick={() => removeFromCart(item.id)}>Remove</button>
+                            ? <button className="btn btn-danger btn-sm" onClick={() => handleRemoveFromCart(item.id)}>Remove All</button>
+                            : <button className="btn btn-primary btn-sm" onClick={() => handleRemoveFromCart(item.id)}>Remove</button>
                           }
                           <button
                             className="btn btn-primary btn-sm"
-                            onClick={() => addToCart({
+                            onClick={() => handleAddToCart({
                               id: item.productId, // Use the original product ID
                               name: item.name,
                               price: parseFloat(item.pricePayable.replace('$', '')),
@@ -103,6 +146,7 @@ const Cart = () => {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };

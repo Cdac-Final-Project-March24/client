@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { CartContext } from '../../../../components/CartContext';
 import { toast, ToastContainer } from 'react-toastify';
-import { getLatestOfferings } from '../../../../services/offering'; // Adjust the path as needed
+import { addToCart } from '../../../../services/cart'; // Import the service methods
+import { getLatestOfferings } from '../../../../services/offering';
 
 const LatestProducts = ({ id }) => {
-    const { addToCart } = useContext(CartContext);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -30,9 +29,24 @@ const LatestProducts = ({ id }) => {
         fetchLatestOfferings();
     }, [id]);
 
-    const handleAddToCart = (product) => {
-        toast.success(`${product.name} added to cart!`);
-        addToCart(product);
+    const handleAddToCart = async (product) => {
+        try {
+            const cartDto = {
+                businessId: id,
+                offeringId: product.id,
+                // Add other required fields here if any
+            };
+
+            const response = await addToCart(cartDto);
+
+            if (response.status === 201) {
+                toast.success(`${product.name} added to cart!`);
+            } else {
+                toast.error('Failed to add to cart');
+            }
+        } catch (error) {
+            toast.error('An error occurred while adding to cart');
+        }
     };
 
     if (loading) return <p>Loading...</p>;
@@ -75,4 +89,3 @@ const LatestProducts = ({ id }) => {
 };
 
 export default LatestProducts;
-

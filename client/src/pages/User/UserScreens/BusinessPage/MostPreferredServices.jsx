@@ -1,39 +1,60 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { CartContext } from '../../../../components/CartContext'; // Import CartContext
 import { toast, ToastContainer } from 'react-toastify';
-import { getMostPreferredOfferings } from '../../../../services/business'; // Import the service method
+import {  addToCart } from '../../../../services/cart'; // Import the service methods
+import { getMostPreferredOfferings } from '../../../../services/business';
 
 const MostPreferredServices = ({ id }) => {
     const [services, setServices] = useState([]); // State to hold the services
-    const { addToCart } = useContext(CartContext); // Access addToCart from context
+    const [loading, setLoading] = useState(true); // State to handle loading
+    const [error, setError] = useState(null); // State to handle errors
 
     const type = 'MostPreferredService'; // Assuming 'MostPreferredService' is the type for most preferred services
 
     useEffect(() => {
         const fetchMostPreferredServices = async () => {
             try {
-                const { data, status } = await getMostPreferredOfferings(id, type);
-                if (status === 200) {
-                    setServices(data); // Set the services data from API
+                const response = await getMostPreferredOfferings(id, type);
+                if (response.status === 200) {
+                    setServices(response.data); // Set the services data from API
                 } else {
-                    toast.error('Failed to fetch most preferred services');
+                    setError('Failed to fetch most preferred services'); // Set error message if status is not 200
                 }
             } catch (error) {
-                toast.error('An error occurred while fetching the services');
+                setError('An error occurred while fetching the services'); // Set error message if request fails
+            } finally {
+                setLoading(false); // Set loading to false when done
             }
         };
 
         if (id) {
             fetchMostPreferredServices();
         }
-    }, [id]);
+    }, [id]); // Dependency array includes `id` to refetch if it changes
 
-    const handleAddToCart = (service) => {
-        toast.success(`${service.name} added to cart!`);
-        addToCart(service); // Add service to cart (if applicable)
+    const handleAddToCart = async (service) => {
+        try {
+            const cartDto = {
+                businessId: id,
+                offeringId: service.id,
+                // Add other required fields here if any
+            };
+
+            const response = await addToCart(cartDto); // Call the Axios service method to add to cart
+
+            if (response.status === 201) {
+                toast.success(`${service.name} added to cart!`); // Show success message
+            } else {
+                toast.error('Failed to add to cart'); // Show error message
+            }
+        } catch (error) {
+            toast.error('An error occurred while adding to cart'); // Show error message if request fails
+        }
     };
+
+    if (loading) return <p>Loading...</p>; // Show loading message
+    if (error) return <p>Error: {error}</p>; // Show error message
 
     return (
         <div className="container my-4">

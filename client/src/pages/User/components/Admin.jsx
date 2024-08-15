@@ -17,16 +17,20 @@ const Admin = () => {
   const [businesses, setBusinesses] = useState(initialBusinesses);
 
   const handleBlock = (id) => {
-    setBusinesses(businesses.map(business => 
-      business.id === id ? { ...business, isBlocked: true } : business
-    ));
+    setBusinesses(prevBusinesses =>
+      prevBusinesses.map(business =>
+        business.id === id ? { ...business, isBlocked: true } : business
+      )
+    );
     toast.error('Business Blocked Successfully');
   };
 
   const handleUnblock = (id) => {
-    setBusinesses(businesses.map(business => 
-      business.id === id ? { ...business, isBlocked: false } : business
-    ));
+    setBusinesses(prevBusinesses =>
+      prevBusinesses.map(business =>
+        business.id === id ? { ...business, isBlocked: false } : business
+      )
+    );
     toast.success('Business Unblocked Successfully');
   };
 
@@ -70,8 +74,9 @@ const Admin = () => {
             </div>
           ))}
         </div>
-        <ToastContainer />
+        
       </div>
+      <ToastContainer />
     </>
   );
 };

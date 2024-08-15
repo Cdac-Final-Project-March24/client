@@ -87,6 +87,7 @@ const Navbar = () => {
               />
               </Link>
               <Link to="/customer/cart" style={{ textDecoration: 'none' }}><span >Your Cart</span></Link>
+              <Link to="/business/orders" style={{ textDecoration: 'none' }}><span >Your Business</span></Link>
             </div>
           </div>
         </div>

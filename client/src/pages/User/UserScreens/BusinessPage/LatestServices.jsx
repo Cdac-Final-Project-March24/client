@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { CartContext } from '../../../../components/CartContext'; // Import CartContext
 import { toast, ToastContainer } from 'react-toastify';
-import { getLatestOfferings } from '../../../../services/offering'; // Import the service method
+import { addToCart } from '../../../../services/cart'; 
+import {getLatestOfferings} from '../../../../services/offering'
 
 const LatestServices = ({ id }) => {
-    const { addToCart } = useContext(CartContext); // Access addToCart from context
     const [services, setServices] = useState([]); // State to hold the services
     const [loading, setLoading] = useState(true); // State to handle loading
     const [error, setError] = useState(null); // State to handle errors
@@ -30,9 +29,24 @@ const LatestServices = ({ id }) => {
         fetchLatestServices();
     }, [id]); // Dependency array includes `id` to refetch if it changes
 
-    const handleAddToCart = (service) => {
-        toast.success(`${service.name} added to cart!`);
-        addToCart(service); // Add service to cart
+    const handleAddToCart = async (service) => {
+        try {
+            const cartDto = {
+                businessId: id,
+                offeringId: service.id,
+                // Add other required fields here if any
+            };
+
+            const response = await addToCart(cartDto); // Call the Axios service method to add to cart
+
+            if (response.status === 201) {
+                toast.success(`${service.name} added to cart!`); // Show success message
+            } else {
+                toast.error('Failed to add to cart'); // Show error message
+            }
+        } catch (error) {
+            toast.error('An error occurred while adding to cart'); // Show error message if request fails
+        }
     };
 
     if (loading) return <p>Loading...</p>; // Show loading message
