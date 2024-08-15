@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../../services/user";
 import image from "./Logo.jpeg";
@@ -7,6 +7,12 @@ import { toast } from "react-toastify";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  //Clear session and local storage on login
+  useEffect(() => {
+    sessionStorage.clear();
+    localStorage.clear();
+  }, []);
 
   // get the navigate object
   const navigate = useNavigate();
