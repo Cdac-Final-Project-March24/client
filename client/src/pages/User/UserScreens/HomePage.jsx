@@ -1,35 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar1';
 import Slider from 'react-slick';
+import { fetchTopProducts, fetchTopServices, fetchTopBusinesses } from '../../../services/homePageService';
 
 const Home = () => {
-  const topProducts = [
-    { id: 1, name: "Product 1", description: "Description of Product 1", image: "https://via.placeholder.com/150" },
-    { id: 2, name: "Product 2", description: "Description of Product 2", image: "https://via.placeholder.com/150" },
-    { id: 3, name: "Product 3", description: "Description of Product 3", image: "https://via.placeholder.com/150" },
-    { id: 4, name: "Product 4", description: "Description of Product 4", image: "https://via.placeholder.com/150" },
-    { id: 5, name: "Product 5", description: "Description of Product 5", image: "https://via.placeholder.com/150" },
-  ];
+  const [topProducts, setTopProducts] = useState([]);
+  const [topServices, setTopServices] = useState([]);
+  const [topBusinesses, setTopBusinesses] = useState([]);
+  const [latitude, setLatitude] = useState(null); // Initialize latitude
+  const [longitude, setLongitude] = useState(null); // Initialize longitude
 
-  const topServices = [
-    { id: 1, name: "Service 1", description: "Description of Service 1", image: "https://via.placeholder.com/150" },
-    { id: 2, name: "Service 2", description: "Description of Service 2", image: "https://via.placeholder.com/150" },
-    { id: 3, name: "Service 3", description: "Description of Service 3", image: "https://via.placeholder.com/150" },
-    { id: 4, name: "Service 4", description: "Description of Service 4", image: "https://via.placeholder.com/150" },
-    { id: 5, name: "Service 5", description: "Description of Service 5", image: "https://via.placeholder.com/150" },
-  ];
+  useEffect(() => {
+    // Function to get user's location
+    const fetchLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          setLatitude(position.coords.latitude);
+          setLongitude(position.coords.longitude);
+        }, (error) => {
+          console.error("Error getting location:", error);
+        });
+      } else {
+        console.warn("Geolocation is not supported by this browser.");
+      }
+    };
 
-  const topBusinesses = [
-    { id: 1, name: "Business 1", description: "Description of Business 1", image: "https://via.placeholder.com/150" },
-    { id: 2, name: "Business 2", description: "Description of Business 2", image: "https://via.placeholder.com/150" },
-    { id: 3, name: "Business 3", description: "Description of Business 3", image: "https://via.placeholder.com/150" },
-    { id: 4, name: "Business 4", description: "Description of Business 4", image: "https://via.placeholder.com/150" },
-    { id: 5, name: "Business 5", description: "Description of Business 5", image: "https://via.placeholder.com/150" },
-    { id: 6, name: "Business 6", description: "Description of Business 6", image: "https://via.placeholder.com/150" },
-    { id: 7, name: "Business 7", description: "Description of Business 7", image: "https://via.placeholder.com/150" },
-    { id: 8, name: "Business 8", description: "Description of Business 8", image: "https://via.placeholder.com/150" },
-  ];
+    fetchLocation();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (latitude && longitude) {
+        try {
+          const products = await fetchTopProducts(latitude, longitude);
+          const services = await fetchTopServices(latitude, longitude);
+          const businesses = await fetchTopBusinesses(latitude, longitude);
+          setTopProducts(products);
+          setTopServices(services);
+          setTopBusinesses(businesses);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+    };
+
+    fetchData();
+  }, [latitude, longitude]);
 
   const SampleNextArrow = (props) => {
     const { onClick } = props;

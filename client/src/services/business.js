@@ -34,3 +34,5 @@ export async function getBusiness() {
         return e.response.status;
     }
 }
+
+//get individual business page details. 
