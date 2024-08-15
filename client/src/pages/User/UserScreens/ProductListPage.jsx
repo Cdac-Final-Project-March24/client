@@ -1,54 +1,54 @@
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Business from "../../Business/Business";
 import Navbar from "../components/Navbar1";
+import { fetchRelatedBusinesses } from '../../../services/offering'; // Import the service method
+
 const ProductListPage = () => {
+    const { product } = useParams(); // Get the product name from URL params
+    const [businesses, setBusinesses] = useState([]); // State to store businesses
+    const [loading, setLoading] = useState(true); // State to handle loading
+    const [error, setError] = useState(null); // State to handle errors
 
-    const topBusinesses = [
-        { name: 'Business 1', description: 'Description of Business 1', image: 'https://via.placeholder.com/150' },
-        { name: 'Business 2', description: 'Description of Business 2', image: 'https://via.placeholder.com/150' },
-        { name: 'Business 3', description: 'Description of Business 3', image: 'https://via.placeholder.com/150' },
-        { name: 'Business 4', description: 'Description of Business 4', image: 'https://via.placeholder.com/150' },
-        { name: 'Business 5', description: 'Description of Business 5', image: 'https://via.placeholder.com/150' },
-        { name: 'Business 6', description: 'Description of Business 6', image: 'https://via.placeholder.com/150' },
-        { name: 'Business 7', description: 'Description of Business 7', image: 'https://via.placeholder.com/150' },
-        { name: 'Business 8', description: 'Description of Business 8', image: 'https://via.placeholder.com/150' },
-        { name: 'Business 9', description: 'Description of Business 9', image: 'https://via.placeholder.com/150' },
-        { name: 'Business 10', description: 'Description of Business 10', image: 'https://via.placeholder.com/150' },
-        { name: 'Business 11', description: 'Description of Business 11', image: 'https://via.placeholder.com/150' },
-        { name: 'Business 12', description: 'Description of Business 12', image: 'https://via.placeholder.com/150' },
-    ];
+    useEffect(() => {
+        const loadBusinesses = async () => {
+            try {
+                const fetchedBusinesses = await fetchRelatedBusinesses(product);
+                setBusinesses(fetchedBusinesses);
+            } catch (err) {
+                setError('Failed to fetch businesses.');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    const {product} = useParams();
+        loadBusinesses();
+    }, [product]);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>{error}</p>;
+
     return (
         <>
             <Navbar />
             <div className="container">
-
-                <h1 style={{ textAlign: "center" }}>Best Results for Product : {product}</h1>
+                <h1 style={{ textAlign: "center" }}>Best Results for Product: {product}</h1>
                 <div className="row mt-2">
-                    {
-                        topBusinesses.map((bussiness, index) => {
-                            return(
-                            <div className="col-md-3 mb-4" key={index}>
-
-                                <div className="card" style={{ width: "18rem" }}>
-                                    <img src={bussiness.image} className="card-img-top" alt="..." />
-                                    <div className="card-body" style={{backgroundColor:"skyblue"}}>
-                                        <h5 className="card-title">{bussiness.name}</h5>
-                                        <p className="card-text">{bussiness.description}</p>
-                                        <Link to={`/customer/${bussiness.name}`} className="btn btn-primary">Go to {bussiness.name} page</Link>
-                                    </div>
+                    {businesses.map((business, index) => (
+                        <div className="col-md-3 mb-4" key={index}>
+                            <div className="card" style={{ width: "18rem" }}>
+                                <img src={business.cover} className="card-img-top" alt={business.name} />
+                                <div className="card-body" style={{ backgroundColor: "skyblue" }}>
+                                    <h5 className="card-title">{business.name}</h5>
+                                    <p className="card-text">{business.description}</p>
+                                    <Link to={`/customer/${business.name}`} className="btn btn-primary">Go to {business.name} page</Link>
                                 </div>
                             </div>
-                            )
-
-                        })
-                    }
+                        </div>
+                    ))}
                 </div>
-
             </div>
         </>
-    )
-}
+    );
+};
 
 export default ProductListPage;

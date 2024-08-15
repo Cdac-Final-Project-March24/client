@@ -83,3 +83,5 @@ export const fetchRelatedBusinesses = async (offeringName) => {
       throw error;
     }
   };
+
+  

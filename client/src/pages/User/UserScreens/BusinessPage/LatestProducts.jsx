@@ -1,24 +1,42 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CartContext } from '../../../../components/CartContext';
 import { toast, ToastContainer } from 'react-toastify';
+import { getLatestOfferings } from '../../../../services/offering'; // Adjust the path as needed
 
-const products = [
-    { id: 1, name: 'Product 1', description: 'This is a short description of Product 1.', price: 20 },
-    { id: 2, name: 'Product 2', description: 'This is a short description of Product 2.', price: 30 },
-    { id: 3, name: 'Product 3', description: 'This is a short description of Product 3.', price: 25 },
-    { id: 4, name: 'Product 4', description: 'This is a short description of Product 4.', price: 15 },
-    // Add more products as needed
-];
-
-const LatestProducts = () => {
+const LatestProducts = ({ id }) => {
     const { addToCart } = useContext(CartContext);
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchLatestOfferings = async () => {
+            try {
+                const response = await getLatestOfferings(id, 'product');
+                if (response.status === 200) {
+                    setProducts(response.data);
+                } else {
+                    setError(response.message);
+                }
+            } catch (error) {
+                setError('Failed to fetch latest products');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchLatestOfferings();
+    }, [id]);
 
     const handleAddToCart = (product) => {
         toast.success(`${product.name} added to cart!`);
         addToCart(product);
     };
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
 
     return (
         <div className="container my-4">
@@ -51,7 +69,7 @@ const LatestProducts = () => {
                     </div>
                 ))}
             </div>
-            <ToastContainer/>
+            <ToastContainer />
         </div>
     );
 };

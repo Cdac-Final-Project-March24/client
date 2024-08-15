@@ -1,52 +1,45 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CartContext } from '../../../../components/CartContext'; // Import CartContext
-import { ToastContainer } from 'react-toastify';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import { getMostPreferredOfferings } from '../../../../services/business'; // Import the service method
 
-const preferredServices = [
-    {
-        id: 1,
-        name: 'Preferred Service 1',
-        description: 'This is a short description of Preferred Service 1.',
-        price: 150,
-    },
-    {
-        id: 2,
-        name: 'Preferred Service 2',
-        description: 'This is a short description of Preferred Service 2.',
-        price: 120,
-    },
-    {
-        id: 3,
-        name: 'Preferred Service 3',
-        description: 'This is a short description of Preferred Service 3.',
-        price: 180,
-    },
-    {
-        id: 4,
-        name: 'Preferred Service 4',
-        description: 'This is a short description of Preferred Service 4.',
-        price: 200,
-    },
-    // Add more preferred services as needed
-];
-
-const MostPreferredServices = () => {
+const MostPreferredServices = ({ id }) => {
+    const [services, setServices] = useState([]); // State to hold the services
     const { addToCart } = useContext(CartContext); // Access addToCart from context
 
+    const type = 'MostPreferredService'; // Assuming 'MostPreferredService' is the type for most preferred services
+
+    useEffect(() => {
+        const fetchMostPreferredServices = async () => {
+            try {
+                const { data, status } = await getMostPreferredOfferings(id, type);
+                if (status === 200) {
+                    setServices(data); // Set the services data from API
+                } else {
+                    toast.error('Failed to fetch most preferred services');
+                }
+            } catch (error) {
+                toast.error('An error occurred while fetching the services');
+            }
+        };
+
+        if (id) {
+            fetchMostPreferredServices();
+        }
+    }, [id]);
+
     const handleAddToCart = (service) => {
-        // Handle add to cart logic here
         toast.success(`${service.name} added to cart!`);
-        addToCart(service); // Add service to cart
+        addToCart(service); // Add service to cart (if applicable)
     };
 
     return (
         <div className="container my-4">
             <h5 className="mb-4">Most Preferred Services</h5>
             <div className="row">
-                {preferredServices.map((service) => (
+                {services.map((service) => (
                     <div className="col-md-3 mb-4" key={service.id}>
                         <div className="card h-100">
                             <Link to={`/customer/business/service/${service.name}`} className="text-decoration-none">
@@ -54,7 +47,7 @@ const MostPreferredServices = () => {
                                     <h6 className="card-title">{service.name}</h6>
                                     <p className="card-text">{service.description}</p>
                                     <div className="mt-auto">
-                                        <p className="text-primary font-weight-bold">${service.price.toFixed(2)}</p>
+                                        <p className="text-primary font-weight-bold">${service.price ? service.price.toFixed(2) : 'N/A'}</p>
                                     </div>
                                 </div>
                             </Link>
@@ -62,7 +55,7 @@ const MostPreferredServices = () => {
                                 <button 
                                     className="btn btn-primary w-100"
                                     onClick={(e) => {
-                                        e.stopPropagation(); // Prevent click event from bubbling up to Link
+                                        e.stopPropagation(); // Prevent click event from bubbling up to the Link component
                                         handleAddToCart(service);
                                     }}
                                 >
@@ -73,7 +66,7 @@ const MostPreferredServices = () => {
                     </div>
                 ))}
             </div>
-            <ToastContainer/>
+            <ToastContainer />
         </div>
     );
 };

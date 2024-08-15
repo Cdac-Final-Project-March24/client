@@ -1,25 +1,42 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CartContext } from '../../../../components/CartContext'; // Import CartContext
 import { toast, ToastContainer } from 'react-toastify';
+import { getLatestOfferings } from '../../../../services/offering'; // Import the service method
 
-const services = [
-    { id: 1, name: 'Service 1', description: 'This is a short description of Service 1.', price: 100 },
-    { id: 2, name: 'Service 2', description: 'This is a short description of Service 2.', price: 150 },
-    { id: 3, name: 'Service 3', description: 'This is a short description of Service 3.', price: 120 },
-    { id: 4, name: 'Service 4', description: 'This is a short description of Service 4.', price: 200 },
-    // Add more services as needed
-];
-
-const LatestServices = () => {
+const LatestServices = ({ id }) => {
     const { addToCart } = useContext(CartContext); // Access addToCart from context
+    const [services, setServices] = useState([]); // State to hold the services
+    const [loading, setLoading] = useState(true); // State to handle loading
+    const [error, setError] = useState(null); // State to handle errors
+
+    useEffect(() => {
+        const fetchLatestServices = async () => {
+            try {
+                const response = await getLatestOfferings(id, 'service'); // Call the service method
+                if (response.status === 200) {
+                    setServices(response.data); // Set the services data from API
+                } else {
+                    setError(response.message); // Set error message if status is not 200
+                }
+            } catch (error) {
+                setError('Failed to fetch latest services'); // Set error message if request fails
+            } finally {
+                setLoading(false); // Set loading to false when done
+            }
+        };
+
+        fetchLatestServices();
+    }, [id]); // Dependency array includes `id` to refetch if it changes
 
     const handleAddToCart = (service) => {
-        // Handle add to cart logic here
         toast.success(`${service.name} added to cart!`);
         addToCart(service); // Add service to cart
     };
+
+    if (loading) return <p>Loading...</p>; // Show loading message
+    if (error) return <p>Error: {error}</p>; // Show error message
 
     return (
         <div className="container my-4">
@@ -52,7 +69,7 @@ const LatestServices = () => {
                     </div>
                 ))}
             </div>
-            <ToastContainer/>
+            <ToastContainer />
         </div>
     );
 };

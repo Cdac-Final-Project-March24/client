@@ -1,35 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getReviews } from '../../../../services/business'; // Adjust the path as needed
 
+const Review = ({ bId }) => {
+    const [reviews, setReviews] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-const reviews = [
-    {
-        id: 1,
-        name: 'John Doe',
-        rating: 5,
-        comment: 'Excellent product, highly recommended!',
-    },
-    {
-        id: 2,
-        name: 'Jane Smith',
-        rating: 4,
-        comment: 'Good product, but could be better.',
-    },
-    {
-        id: 3,
-        name: 'Alice Johnson',
-        rating: 3,
-        comment: 'Average product, nothing special.',
-    },
-    {
-        id: 4,
-        name: 'Michael Brown',
-        rating: 5,
-        comment: 'Outstanding quality and performance!',
-    },
-    // Add more reviews as needed
-];
+    useEffect(() => {
+        const fetchReviews = async () => {
+            try {
+                const { data, status } = await getReviews(bId);
+                if (status === 200) {
+                    setReviews(data);
+                } else {
+                    setError('Failed to fetch reviews');
+                }
+            } catch (error) {
+                setError('Failed to fetch reviews');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-const Review = () => {
+        fetchReviews();
+    }, [bId]);
+
+    const renderStars = (rating) => {
+        const starsTotal = 5;
+        const fullStars = Math.floor(rating);
+        const halfStars = Math.ceil(rating - fullStars);
+        const emptyStars = starsTotal - fullStars - halfStars;
+
+        const starArray = [];
+        for (let i = 0; i < fullStars; i++) {
+            starArray.push(<i key={i} className="bi bi-star-fill" style={{ color: '#f39c12' }}></i>);
+        }
+        for (let i = 0; i < halfStars; i++) {
+            starArray.push(<i key={i + fullStars} className="bi bi-star-half" style={{ color: '#f39c12' }}></i>);
+        }
+        for (let i = 0; i < emptyStars; i++) {
+            starArray.push(<i key={i + fullStars + halfStars} className="bi bi-star" style={{ color: '#f39c12' }}></i>);
+        }
+
+        return starArray;
+    };
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
+
     return (
         <div className="container my-4">
             <h5 className="mb-4">Product Reviews</h5>
@@ -49,26 +67,6 @@ const Review = () => {
             ))}
         </div>
     );
-};
-
-const renderStars = (rating) => {
-    const starsTotal = 5;
-    const fullStars = Math.floor(rating);
-    const halfStars = Math.ceil(rating - fullStars);
-    const emptyStars = starsTotal - fullStars - halfStars;
-
-    const starArray = [];
-    for (let i = 0; i < fullStars; i++) {
-        starArray.push(<i key={i} className="bi bi-star-fill" style={{ color: '#f39c12' }}></i>);
-    }
-    for (let i = 0; i < halfStars; i++) {
-        starArray.push(<i key={i + fullStars} className="bi bi-star-half" style={{ color: '#f39c12' }}></i>);
-    }
-    for (let i = 0; i < emptyStars; i++) {
-        starArray.push(<i key={i + fullStars + halfStars} className="bi bi-star" style={{ color: '#f39c12' }}></i>);
-    }
-
-    return starArray;
 };
 
 export default Review;

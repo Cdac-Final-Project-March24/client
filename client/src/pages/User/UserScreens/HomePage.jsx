@@ -89,7 +89,7 @@ const Home = () => {
           <div className="slider-container">
             <Slider {...settings}>
               {topProducts.map((product) => (
-                <Link to={`listing/product/${product.name}`} key={product.id} style={{ textDecoration: 'none' }}>
+                <Link to={`/customer/listing/product/${product.name}`} key={product.id} style={{ textDecoration: 'none' }}>
                   <div className="px-3">
                     <div className="card overflow-hidden">
                       <img src={product.image} className="card-img-top" alt={product.name} />
@@ -112,7 +112,7 @@ const Home = () => {
           <div className="slider-container">
             <Slider {...settings}>
               {topServices.map((service) => (
-                <Link to={`listing/service/${service.name}`} key={service.id} style={{ textDecoration: 'none' }}>
+                <Link to={`/customer/listing/service/${service.name}`} key={service.id} style={{ textDecoration: 'none' }}>
                   <div className="px-3">
                     <div className="card overflow-hidden">
                       <img src={service.image} className="card-img-top" alt={service.name} />
@@ -134,7 +134,7 @@ const Home = () => {
           <h2 className="text-center mb-4">Top Businesses</h2>
           <div className="d-flex gap-4 justify-content-between flex-wrap">
             {topBusinesses.map((business) => (
-              <Link to={`${business.name}`} key={business.id} style={{ textDecoration: 'none' }}>
+              <Link to={`/customer/${business.name}`} key={business.id} style={{ textDecoration: 'none' }}>
                 <div className="card overflow-hidden" style={{ minWidth: "18rem" }}>
                   <img src={business.image} className="card-img-top" alt={business.name} />
                   <div className="card-body" style={{ backgroundColor: "skyblue" }}>
