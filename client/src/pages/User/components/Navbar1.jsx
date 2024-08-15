@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import image from "../../../Images/Logo.jpeg";
 import image2 from "../../../Images/profile.png";
 
@@ -9,6 +9,8 @@ const Navbar = () => {
     city: "Unknown",
   });
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate =  useNavigate();
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -30,6 +32,14 @@ const Navbar = () => {
       });
     }
   }, []);
+
+  const handleSearch = (e) => {
+    e.preventDefault(); // Prevent default form submission
+    if (searchQuery.trim()) {
+      // Navigate to the search results page with the query
+      navigate(`/customer/listing/product/${(searchQuery.trim())}`);
+    }
+  };
 
   return (
     <nav
@@ -70,8 +80,10 @@ const Navbar = () => {
               type="search"
               placeholder="Search for products and services Nearby"
               aria-label="Search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <button className="btn btn-outline-primary" type="submit">
+            <button className="btn btn-outline-primary" onClick={handleSearch}>
               Search
             </button>
           </form>
