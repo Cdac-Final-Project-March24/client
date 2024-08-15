@@ -1,22 +1,29 @@
 import React from "react";
 
-const Order = () => {
+const Order = ({ order }) => {
   return (
     <div
       className="container row shadow-sm border p-4 rounded-3"
       style={{ background: "white" }}
     >
       <div className="col border-end">
-        <h5>Id: 111111</h5>
-        <div className="fs-5">Customer: Customer name</div>
-        <div className="fw-light">
-          Address: Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Ducimus, cupiditate.
-        </div>
-        <div className="fw-light">Date: 02/02/2024</div>
+        <h5>Id: {order.id}</h5>
+        <div className="fs-5">Customer: {order.customerName}</div>
+        <div className="fw-light">Address: {order.address}</div>
+        <div className="fw-light">Date: {order.createdOn}</div>
       </div>
       <div className="col border-end">
-        <div className="row">
+        {order.subOrder.map((item, index) => {
+          return (
+            <div className="row" key={index}>
+              <div className="col">
+                {item.offering.name} * {item.quantity}
+              </div>
+              <div className="col">{item.offering.price * item.quantity}/-</div>
+            </div>
+          );
+        })}
+        {/* <div className="row">
           <div className="col">Order 1</div>
           <div className="col">900/-</div>
         </div>
@@ -32,7 +39,7 @@ const Order = () => {
         <div className="row fw-medium">
           <div className="col">Total bill</div>
           <div className="col">900/-</div>
-        </div>
+        </div> */}
         <button className="btn btn-primary w-100 mt-2">Ready</button>
       </div>
       <div className="col">

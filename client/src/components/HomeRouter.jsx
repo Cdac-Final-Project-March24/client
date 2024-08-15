@@ -50,19 +50,18 @@ const HomeRouter = () => {
             </Route>
             <Route path="cart" element={<Cart />} />
             <Route path="checkout" element={<CheckOut />} />
-
-            {/* Business side rutes */}
-            <Route path="business" element={<Business />}>
-              <Route path="register" element={<RegisterBusiness />} />
-              <Route path="orders" element={<Orders />} />
-              <Route path="products" element={<Catalogue type={"product"} />} />
-              <Route path="services" element={<Catalogue type={"service"} />} />
-              <Route path="add-product" element={"Business add product page"} />
-              <Route path="add-service" element={"Business add service page"} />
-              <Route path="payments" element={<Payment />} />
-              <Route path="profile" element={<Profile />} />
-              <Route path="reviews" element={<Reviews />} />
-            </Route>
+          </Route>
+          {/* Business side rutes */}
+          <Route path="business" element={<Business />}>
+            <Route path="register" element={<RegisterBusiness />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="products" element={<Catalogue type={"product"} />} />
+            <Route path="services" element={<Catalogue type={"service"} />} />
+            <Route path="add-product" element={"Business add product page"} />
+            <Route path="add-service" element={"Business add service page"} />
+            <Route path="payments" element={<Payment />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="reviews" element={<Reviews />} />
           </Route>
         </Route>
       </Routes>

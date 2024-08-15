@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavBar from "./components/NavBar";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import "./Business.css";
+import { getBusiness } from "../../services/business";
 
 const Business = () => {
   const isRegisterPage = useLocation().pathname.substring(10) === "register";
+  const navigate = useNavigate();
+  useEffect(() => {
+    (async () => {
+      const result = await getBusiness();
+      if (result !== 200) navigate("/business/register");
+    })();
+  }, []);
+
   return (
     <div>
       {isRegisterPage || <Header />}

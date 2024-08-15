@@ -18,7 +18,7 @@ const RegisterBusiness = () => {
       const result = await register(name, description, cover);
       if (result.status === 201) {
         toast.success("Business Created Successfully");
-        navigate("orders");
+        navigate("/business/orders");
       }
     }
   };

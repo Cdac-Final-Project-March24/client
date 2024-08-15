@@ -1,7 +1,8 @@
 import React from "react";
 
 const Header = () => {
-  const business = JSON.parse(sessionStorage["business"]);
+  const temp = sessionStorage["business"];
+  const business = JSON.parse(temp == null ? "{}" : temp);
   return (
     <div
       className="container-fluid shadow-sm d-flex align-items-center justify-content-between"
