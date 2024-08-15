@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { getOrdersByBusiness } from "../../../services/order";
 
 const Orders = () => {
-  const business = JSON.parse(sessionStorage["business"]);
+  const business = JSON.parse(sessionStorage["business"]?sessionStorage["business"]:"{}");
   const [orders, setOrders] = useState([]);
   useEffect(() => {
     (async () => {
