@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar1';
-import Slider from 'react-slick';
-import { fetchTopProducts, fetchTopServices, fetchTopBusinesses } from '../../../services/homePageService';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar1";
+import Slider from "react-slick";
+import {
+  fetchTopProducts,
+  fetchTopServices,
+  fetchTopBusinesses,
+} from "../../../services/homePageService";
 
 const Home = () => {
   const [topProducts, setTopProducts] = useState([]);
@@ -15,12 +19,15 @@ const Home = () => {
     // Function to get user's location
     const fetchLocation = () => {
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          setLatitude(position.coords.latitude);
-          setLongitude(position.coords.longitude);
-        }, (error) => {
-          console.error("Error getting location:", error);
-        });
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setLatitude(position.coords.latitude);
+            setLongitude(position.coords.longitude);
+          },
+          (error) => {
+            console.error("Error getting location:", error);
+          }
+        );
       } else {
         console.warn("Geolocation is not supported by this browser.");
       }
@@ -81,7 +88,10 @@ const Home = () => {
   };
 
   return (
-    <div className="container" style={{ borderRadius: "10px", minHeight: "100vh" }}>
+    <div
+      className="container"
+      style={{ borderRadius: "10px", minHeight: "100vh" }}
+    >
       <Navbar />
       <div className="row my-4">
         <div className="col-12">
@@ -89,11 +99,22 @@ const Home = () => {
           <div className="slider-container">
             <Slider {...settings}>
               {topProducts.map((product) => (
-                <Link to={`/customer/listing/product/${product.name}`} key={product.id} style={{ textDecoration: 'none' }}>
+                <Link
+                  to={`/customer/listing/product/${product.name}`}
+                  key={product.id}
+                  style={{ textDecoration: "none" }}
+                >
                   <div className="px-3">
                     <div className="card overflow-hidden">
-                      <img src={product.image} className="card-img-top" alt={product.name} />
-                      <div className="card-body" style={{ backgroundColor: "skyblue" }}>
+                      <img
+                        src={product.image}
+                        className="card-img-top"
+                        alt={product.name}
+                      />
+                      <div
+                        className="card-body"
+                        style={{ backgroundColor: "skyblue" }}
+                      >
                         <h5 className="card-title text">{product.name}</h5>
                         <p className="card-text">{product.description}</p>
                       </div>
@@ -112,11 +133,22 @@ const Home = () => {
           <div className="slider-container">
             <Slider {...settings}>
               {topServices.map((service) => (
-                <Link to={`/customer/listing/service/${service.name}`} key={service.id} style={{ textDecoration: 'none' }}>
+                <Link
+                  to={`/customer/listing/service/${service.name}`}
+                  key={service.id}
+                  style={{ textDecoration: "none" }}
+                >
                   <div className="px-3">
                     <div className="card overflow-hidden">
-                      <img src={service.image} className="card-img-top" alt={service.name} />
-                      <div className="card-body" style={{ backgroundColor: "skyblue" }}>
+                      <img
+                        src={service.image}
+                        className="card-img-top"
+                        alt={service.name}
+                      />
+                      <div
+                        className="card-body"
+                        style={{ backgroundColor: "skyblue" }}
+                      >
                         <h5 className="card-title text">{service.name}</h5>
                         <p className="card-text">{service.description}</p>
                       </div>
@@ -132,17 +164,30 @@ const Home = () => {
       <div className="row mt-5 pb-5">
         <div className="col-12">
           <h2 className="text-center mb-4">Top Businesses</h2>
-          <div className="d-flex gap-4 justify-content-between flex-wrap">
+          <div className="row">
             {topBusinesses.map((business) => (
-              <Link to={`/customer/${business.name}`} key={business.id} style={{ textDecoration: 'none' }}>
-                <div className="card overflow-hidden" style={{ minWidth: "18rem" }}>
-                  <img src={business.image} className="card-img-top" alt={business.name} />
-                  <div className="card-body" style={{ backgroundColor: "skyblue" }}>
-                    <h5 className="card-title text">{business.name}</h5>
-                    <p className="card-text">{business.description}</p>
+              <div className="col-md-3 col-sm-1 mb-5">
+                <Link
+                  to={`/customer/${business.id}`}
+                  key={business.id}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="card overflow-hidden">
+                    <img
+                      src={business.cover}
+                      className="card-img-top"
+                      alt={business.name}
+                    />
+                    <div
+                      className="card-body"
+                      style={{ backgroundColor: "skyblue" }}
+                    >
+                      <h5 className="card-title text">{business.name}</h5>
+                      <p className="card-text">{business.description}</p>
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
             ))}
           </div>
         </div>

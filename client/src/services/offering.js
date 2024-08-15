@@ -74,14 +74,11 @@ export async function updateOffering(offering, type, img, oId) {
 // Fetch related businesses based on the offering name
 export const fetchRelatedBusinesses = async (offeringName) => {
     try {
-      const response = await instance.get('/offerings/related-businesses', {
-        params: { offeringName }
-      });
-      return response.data;
+        const response = await instance.get(`/offering/related-businesses/${offeringName}`);
+        return response.data;
     } catch (error) {
-      console.error("Error fetching related businesses:", error);
-      throw error;
+        console.error("Error fetching related businesses:", error);
+        throw error;
     }
-  };
+};
 
-  
