@@ -7,6 +7,7 @@ import {
   fetchTopServices,
   fetchTopBusinesses,
 } from "../../../services/homePageService";
+import { ToastContainer } from "react-toastify";
 
 const Home = () => {
   const [topProducts, setTopProducts] = useState([]);

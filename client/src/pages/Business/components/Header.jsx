@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const temp = sessionStorage["business"];
@@ -13,12 +14,14 @@ const Header = () => {
         top: 0,
       }}
     >
-      <img
-        src="/logo.png"
-        className="img-fluid"
-        alt=""
-        style={{ height: "80px" }}
-      />
+      <Link to="/customer">
+        <img
+          src="/logo.png"
+          className="img-fluid"
+          alt=""
+          style={{ height: "80px" }}
+        />
+      </Link>
       <div className="d-flex align-items-center">
         <i className="bi bi-bell fs-5 me-3"></i>
         <i className="bi bi-person-circle me-2 fs-3"></i>

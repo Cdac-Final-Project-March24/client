@@ -15,16 +15,18 @@ const Navbar = () => {
         const { latitude, longitude } = position.coords;
 
         // Fetch location data from a reverse geocoding API
-        fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`)
-          .then(response => response.json())
-          .then(data => {
+        fetch(
+          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+        )
+          .then((response) => response.json())
+          .then((data) => {
             // Set the city and state from the response
             setLocation({
               area: data.locality || "Unknown",
-              city: data.principalSubdivision || "Unknown"
+              city: data.principalSubdivision || "Unknown",
             });
           })
-          .catch(error => {
+          .catch((error) => {
             console.error("Error fetching location data:", error);
           });
       });
@@ -52,14 +54,24 @@ const Navbar = () => {
           <ul className="navbar-nav mb-2 mb-lg-0">
             <li className="nav-item">
               <span className="nav-link">
-                <i className="fas fa-map-marker-alt me-1"></i> {location.area}, {location.city}
+                <i className="fas fa-map-marker-alt me-1"></i> {location.area},{" "}
+                {location.city}
               </span>
             </li>
           </ul>
 
           <div style={{ marginLeft: "300px" }}>
-            <Link to="/customer" className="navbar-brand d-flex align-items-center" >
-              <img height="50" width="50" src={image} alt="Logo" />
+            <Link
+              to="/customer"
+              className="navbar-brand d-flex align-items-center"
+            >
+              <img
+                src="/logo.png"
+                className="img-fluid"
+                alt=""
+                height={60}
+                width={60}
+              />
               <span className="h4 mb-0">HomeBazzar</span>
             </Link>
           </div>
@@ -75,19 +87,19 @@ const Navbar = () => {
               Search
             </button>
           </form>
-          <div className="ms-2">
+          <div className="ms-3">
             <div className="d-flex align-items-center text-decoration-none">
               <Link to="/customer/profile">
-              <img
-                src={image2}
-                alt="Profile"
-                height={40}
-                width={40}
-                className="rounded-circle me-2"
-              />
+                <i className="bi bi-person-circle me-3 fs-3"></i>
               </Link>
-              <Link to="/customer/cart" style={{ textDecoration: 'none' }}><span >Your Cart</span></Link>
-              <Link to="/business/orders" style={{ textDecoration: 'none' }}><span > Your Business</span></Link>
+              <Link to="/customer/cart" style={{ textDecoration: "none" }}>
+                <span className="me-3 fs-3">
+                  <i class="bi bi-cart-fill"></i>
+                </span>
+              </Link>
+              <Link to="/business/orders" style={{ textDecoration: "none" }}>
+                <span> Your Business</span>
+              </Link>
             </div>
           </div>
         </div>
