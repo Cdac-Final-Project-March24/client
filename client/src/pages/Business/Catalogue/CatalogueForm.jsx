@@ -7,9 +7,7 @@ import {
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const CatalogueForm = ({ currItem, type, success, setSuccess }) => {
-  const business = JSON.parse(sessionStorage["business"]);
-
+const CatalogueForm = ({ currItem, type, success, setSuccess, business }) => {
   const navigate = useNavigate();
 
   const [name, setName] = useState("");

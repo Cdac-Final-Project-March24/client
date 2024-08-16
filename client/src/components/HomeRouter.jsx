@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Business from "../pages/Business/Business";
 import Orders from "../pages/Business/Orders/Orders";
@@ -22,7 +22,9 @@ import UserProfile from "../pages/User/UserScreens/UserProfile";
 import Admin from "../pages/User/components/Admin";
 import ProtectedRoute from "./ProtectedRoute";
 import RegisterBusiness from "../pages/Business/Register/RegisterBusiness";
+
 const HomeRouter = () => {
+  const [business, setBusiness] = useState(null);
   return (
     <div>
       <Routes>
@@ -52,15 +54,22 @@ const HomeRouter = () => {
             <Route path="checkout" element={<CheckOut />} />
           </Route>
           {/* Business side rutes */}
-          <Route path="business" element={<Business />}>
+          <Route
+            path="business"
+            element={<Business setBusiness={setBusiness} business={business} />}
+          >
             <Route path="register" element={<RegisterBusiness />} />
-            <Route path="orders" element={<Orders />} />
-            <Route path="products" element={<Catalogue type={"product"} />} />
-            <Route path="services" element={<Catalogue type={"service"} />} />
-            <Route path="add-product" element={"Business add product page"} />
-            <Route path="add-service" element={"Business add service page"} />
+            <Route path="orders" element={<Orders business={business} />} />
+            <Route
+              path="products"
+              element={<Catalogue type={"product"} business={business} />}
+            />
+            <Route
+              path="services"
+              element={<Catalogue type={"service"} business={business} />}
+            />
             <Route path="payments" element={<Payment />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="profile" element={<Profile business={business} />} />
             <Route path="reviews" element={<Reviews />} />
           </Route>
         </Route>

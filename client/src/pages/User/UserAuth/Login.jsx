@@ -18,6 +18,8 @@ export default function Login() {
   const navigate = useNavigate();
   const onLogin = async (e) => {
     e.preventDefault();
+    sessionStorage.clear();
+    localStorage.clear();
     // client side validation
     if (email.length === 0) {
       toast.warning("enter email");
@@ -92,7 +94,7 @@ export default function Login() {
                   </button>
                   <p className="mt-2">
                     Not registered yet,
-                    <Link to="/customer/register">Register Here</Link>
+                    <Link to="/register">Register Here</Link>
                   </p>
                 </div>
               </div>

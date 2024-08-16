@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Header = () => {
-  const temp = sessionStorage["business"];
-  const business = JSON.parse(temp == null ? "{}" : temp);
+const Header = ({ business }) => {
   return (
     <div
       className="container-fluid shadow-sm d-flex align-items-center justify-content-between"
@@ -25,7 +23,9 @@ const Header = () => {
       <div className="d-flex align-items-center">
         <i className="bi bi-bell fs-5 me-3"></i>
         <i className="bi bi-person-circle me-2 fs-3"></i>
-        <div style={{ color: "var(--primary)" }}>{business.name}</div>
+        <div style={{ color: "var(--primary)" }}>
+          {business !== null ? business.name : ""}
+        </div>
       </div>
     </div>
   );

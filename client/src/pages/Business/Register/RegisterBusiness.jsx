@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { register } from "../../../services/business";
+import { getBusiness, register } from "../../../services/business";
 import { useNavigate } from "react-router-dom";
 
 const RegisterBusiness = () => {
@@ -18,6 +18,7 @@ const RegisterBusiness = () => {
       const result = await register(name, description, cover);
       if (result.status === 201) {
         toast.success("Business Created Successfully");
+        const result = await getBusiness();
         navigate("/business/orders");
       }
     }

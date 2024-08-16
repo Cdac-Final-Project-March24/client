@@ -4,22 +4,23 @@ import CatalogueForm from "./CatalogueForm";
 import { getLatestOfferings } from "../../../services/offering";
 import { toast } from "react-toastify";
 
-const Catalogue = ({ type }) => {
-  const business = JSON.parse(sessionStorage["business"]);
+const Catalogue = ({ type, business }) => {
   const [offerings, setOfferings] = useState(null);
   const [currItem, setCurrItem] = useState(-1);
   const [success, setSuccess] = useState(true);
   useEffect(() => {
     setCurrItem(-1);
-    (async () => {
-      const result = await getLatestOfferings(business.id, type);
-      if (result.status === 200) {
-        setOfferings(result.data);
-      } else {
-        toast.error(result.message);
-      }
-    })();
-  }, [success, type]);
+    if (business !== null) {
+      (async () => {
+        const result = await getLatestOfferings(business.id, type);
+        if (result.status === 200) {
+          setOfferings(result.data);
+        } else {
+          toast.error(result.message);
+        }
+      })();
+    }
+  }, [business, success, type]);
   return (
     <>
       <div
@@ -35,12 +36,15 @@ const Catalogue = ({ type }) => {
           />
         </div>
         <div className="w-50">
-          <CatalogueForm
-            currItem={currItem}
-            type={type}
-            success={success}
-            setSuccess={setSuccess}
-          />
+          {business && (
+            <CatalogueForm
+              currItem={currItem}
+              type={type}
+              success={success}
+              setSuccess={setSuccess}
+              business={business}
+            />
+          )}
         </div>
       </div>
     </>

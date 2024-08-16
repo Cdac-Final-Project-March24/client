@@ -1,23 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "./components/NavBar";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import "./Business.css";
 import { getBusiness } from "../../services/business";
 
-const Business = () => {
+const Business = ({ business, setBusiness }) => {
   const isRegisterPage = useLocation().pathname.substring(10) === "register";
   const navigate = useNavigate();
   useEffect(() => {
     (async () => {
       const result = await getBusiness();
-      if (result !== 200) navigate("/business/register");
+      console.log(result);
+      if (result.status === 200) {
+        setBusiness(result.data);
+      } else navigate("/business/register");
     })();
   }, []);
 
   return (
     <div>
-      {isRegisterPage || <Header />}
+      {isRegisterPage || <Header business={business} />}
       <div
         className="container-fluid d-flex "
         style={{ padding: 0, margin: 0 }}
