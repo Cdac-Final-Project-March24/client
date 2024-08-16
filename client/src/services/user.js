@@ -31,3 +31,23 @@ export async function register(name, email, password, mobileNumber, address, cit
         return { message, status };
     }
 }
+
+export const updateUserProfile = async (id, userData) => {
+    try {
+      const response = await instance.put(`/user/${id}`, userData);
+      return response.data;
+    } catch (error) {
+      console.error('Error updating user profile:', error);
+      throw error; 
+    }
+  };
+
+  export const getUserByEmail = async (email) => {
+    try {
+      const response = await instance.get(`/user/${email}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching user by email:", error);
+      throw error;
+    }
+  };
