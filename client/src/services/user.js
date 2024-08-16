@@ -32,9 +32,9 @@ export async function register(name, email, password, mobileNumber, address, cit
     }
 }
 
-export const updateUserProfile = async (id, userData) => {
+export const updateUserProfile = async (userData) => {
     try {
-      const response = await instance.put(`/user/${id}`, userData);
+      const response = await instance.put(`/user`, userData);
       return response.data;
     } catch (error) {
       console.error('Error updating user profile:', error);
@@ -42,9 +42,9 @@ export const updateUserProfile = async (id, userData) => {
     }
   };
 
-  export const getUserByEmail = async (email) => {
+  export const getUserByEmail = async () => {
     try {
-      const response = await instance.get(`/user/${email}`);
+      const response = await instance.get(`/user`);
       return response.data;
     } catch (error) {
       console.error("Error fetching user by email:", error);
