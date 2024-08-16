@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Modal, Form, Alert } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import NavBar from '../components/Navbar1';
-import { updateUserProfile, getUserByEmail } from '../../../services/user'; // Import the service methods
+import React, { useState, useEffect } from "react";
+import { Button, Modal, Form, Alert } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import NavBar from "../components/Navbar1";
+import { updateUserProfile, getUserByEmail } from "../../../services/user"; // Import the service methods
 
 const UserProfile = () => {
   const [user, setUser] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    mobileNumber: '',
-    address: '',
-    profilePicture: 'https://via.placeholder.com/150'
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    mobileNumber: "",
+    address: "",
+    profilePicture: "https://via.placeholder.com/150",
   });
 
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({ ...user });
-  const [alertMessage, setAlertMessage] = useState('');
+  const [alertMessage, setAlertMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
-  const [validationError, setValidationError] = useState('');
+  const [validationError, setValidationError] = useState("");
 
   useEffect(() => {
     const fetchUser = async () => {
-      const email = sessionStorage.getItem('email'); // Get email from session storage
+      const email = sessionStorage.getItem("email"); // Get email from session storage
       console.log(email);
       if (email) {
         try {
@@ -31,7 +31,7 @@ const UserProfile = () => {
           setUser(fetchedUser);
           setFormData(fetchedUser); // Initialize form data with fetched user details
         } catch (error) {
-          setAlertMessage('Failed to fetch user data');
+          setAlertMessage("Failed to fetch user data");
           setShowAlert(true);
           setTimeout(() => setShowAlert(false), 3000);
         }
@@ -71,21 +71,18 @@ const UserProfile = () => {
 
   const handleSaveChanges = async () => {
     try {
-    
-        const response = await updateUserProfile(formData);
-        console.log("Request sent")
-        console.log(response)
-        setUser({ ...formData });
-        setShowModal(false);
-        console.log('Profile updated successfully ');
-      }
-     catch (error) {
-      setAlertMessage('Failed to update profile');
+      const response = await updateUserProfile(formData);
+      console.log("Request sent");
+      console.log(response);
+      setUser({ ...formData });
+      setShowModal(false);
+      console.log("Profile updated successfully ");
+    } catch (error) {
+      setAlertMessage("Failed to update profile");
       setShowAlert(true);
       setTimeout(() => setShowAlert(false), 3000);
-      console.log('Error updating profile:', error);
-    }
-    finally{
+      console.log("Error updating profile:", error);
+    } finally {
       setShowModal(false);
     }
   };
@@ -96,27 +93,53 @@ const UserProfile = () => {
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-8">
-            {showAlert && <Alert variant={alertMessage.includes('Failed') ? 'danger' : 'success'} className="text-center">{alertMessage}</Alert>}
-            {validationError && <Alert variant="danger" className="text-center">{validationError}</Alert>}
+            {showAlert && (
+              <Alert
+                variant={alertMessage.includes("Failed") ? "danger" : "success"}
+                className="text-center"
+              >
+                {alertMessage}
+              </Alert>
+            )}
+            {validationError && (
+              <Alert variant="danger" className="text-center">
+                {validationError}
+              </Alert>
+            )}
             <div className="text-center mb-4">
               <img
                 src={user.profilePicture}
                 alt="Profile"
                 className="img-fluid rounded-circle mb-3"
-                style={{ width: '150px', height: '150px', objectFit: 'cover' }}
+                style={{ width: "150px", height: "150px", objectFit: "cover" }}
               />
               <Form.Group controlId="formFile">
                 <Form.Label>Upload Profile Picture</Form.Label>
-                <Form.Control type="file" onChange={handleProfilePictureChange} />
+                <Form.Control
+                  type="file"
+                  onChange={handleProfilePictureChange}
+                />
               </Form.Group>
             </div>
             <div className="bg-light p-4 rounded shadow-sm">
               <h2 className="text-center">User Profile</h2>
-              <p><strong>Name:</strong> {user.name}</p>
-              <p><strong>Email:</strong> {user.email}</p>
-              <p><strong>Mobile Number:</strong> {user.mobileNumber}</p>
-              <p><strong>Address:</strong> {user.address}</p>
-              <Button variant="primary" className="mt-3 d-block mx-auto" onClick={handleShow}>
+              <p>
+                <strong>Name:</strong> {user.name}
+              </p>
+              <p>
+                <strong>Email:</strong> {user.email}
+              </p>
+              <p>
+                <strong>Mobile Number:</strong> {user.mobileNumber}
+              </p>
+              <p>
+                <strong>Address:</strong> {user.address}
+              </p>
+              <Button
+                variant="primary"
+                className="mt-3 d-block mx-auto"
+                onClick={handleShow}
+              >
                 Edit Profile
               </Button>
             </div>
@@ -147,24 +170,6 @@ const UserProfile = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   disabled
-                />
-              </Form.Group>
-              <Form.Group controlId="formPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                />
-              </Form.Group>
-              <Form.Group controlId="formConfirmPassword">
-                <Form.Label>Confirm Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
                 />
               </Form.Group>
               <Form.Group controlId="formMobileNumber">
