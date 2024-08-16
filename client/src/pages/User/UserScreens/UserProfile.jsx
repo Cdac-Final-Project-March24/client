@@ -9,6 +9,7 @@ const UserProfile = () => {
     name: '',
     email: '',
     password: '',
+    confirmPassword: '',
     mobileNumber: '',
     address: '',
     profilePicture: 'https://via.placeholder.com/150'
@@ -18,13 +19,15 @@ const UserProfile = () => {
   const [formData, setFormData] = useState({ ...user });
   const [alertMessage, setAlertMessage] = useState('');
   const [showAlert, setShowAlert] = useState(false);
+  const [validationError, setValidationError] = useState('');
 
   useEffect(() => {
     const fetchUser = async () => {
-      const email = sessionStorage.getItem('userEmail'); // Get email from session storage
+      const email = sessionStorage.getItem('email'); // Get email from session storage
+      console.log(email);
       if (email) {
         try {
-          const fetchedUser = await getUserByEmail(email);
+          const fetchedUser = await getUserByEmail();
           setUser(fetchedUser);
           setFormData(fetchedUser); // Initialize form data with fetched user details
         } catch (error) {
@@ -57,21 +60,33 @@ const UserProfile = () => {
     }
   };
 
+  // const validateForm = () => {
+  //   if (formData.password !== formData.confirmPassword) {
+  //     setValidationError('Passwords do not match');
+  //     return false;
+  //   }
+  //   setValidationError('');
+  //   return true;
+  // };
+
   const handleSaveChanges = async () => {
     try {
-      const email = sessionStorage.getItem('userEmail'); // Get email from session storage
-      if (email) {
-        await updateUserProfile(email, formData);
+    
+        const response = await updateUserProfile(formData);
+        console.log("Request sent")
+        console.log(response)
         setUser({ ...formData });
         setShowModal(false);
-        setAlertMessage('User Profile Updated');
-        setShowAlert(true);
-        setTimeout(() => setShowAlert(false), 3000);
+        console.log('Profile updated successfully ');
       }
-    } catch (error) {
+     catch (error) {
       setAlertMessage('Failed to update profile');
       setShowAlert(true);
       setTimeout(() => setShowAlert(false), 3000);
+      console.log('Error updating profile:', error);
+    }
+    finally{
+      setShowModal(false);
     }
   };
 
@@ -82,6 +97,7 @@ const UserProfile = () => {
         <div className="row justify-content-center">
           <div className="col-md-8">
             {showAlert && <Alert variant={alertMessage.includes('Failed') ? 'danger' : 'success'} className="text-center">{alertMessage}</Alert>}
+            {validationError && <Alert variant="danger" className="text-center">{validationError}</Alert>}
             <div className="text-center mb-4">
               <img
                 src={user.profilePicture}
@@ -98,7 +114,6 @@ const UserProfile = () => {
               <h2 className="text-center">User Profile</h2>
               <p><strong>Name:</strong> {user.name}</p>
               <p><strong>Email:</strong> {user.email}</p>
-              <p><strong>Password:</strong> {user.password}</p>
               <p><strong>Mobile Number:</strong> {user.mobileNumber}</p>
               <p><strong>Address:</strong> {user.address}</p>
               <Button variant="primary" className="mt-3 d-block mx-auto" onClick={handleShow}>
@@ -140,6 +155,15 @@ const UserProfile = () => {
                   type="password"
                   name="password"
                   value={formData.password}
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formConfirmPassword">
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
                   onChange={handleInputChange}
                 />
               </Form.Group>
