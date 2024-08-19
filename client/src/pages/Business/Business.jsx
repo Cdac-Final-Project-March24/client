@@ -8,14 +8,16 @@ import { getBusiness } from "../../services/business";
 const Business = ({ business, setBusiness }) => {
   const isRegisterPage = useLocation().pathname.substring(10) === "register";
   const navigate = useNavigate();
+  const getBusinessData = async () => {
+    const result = await getBusiness();
+    console.log(result);
+    if (result.status === 200) {
+      setBusiness(result.data);
+    } else navigate("/business/register");
+  };
+  if (business == null) getBusinessData();
   useEffect(() => {
-    (async () => {
-      const result = await getBusiness();
-      console.log(result);
-      if (result.status === 200) {
-        setBusiness(result.data);
-      } else navigate("/business/register");
-    })();
+    getBusinessData();
   }, []);
 
   return (

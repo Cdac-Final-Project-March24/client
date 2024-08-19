@@ -4,7 +4,7 @@ import { login } from "../../../services/user";
 import image from "./Logo.jpeg";
 import { toast } from "react-toastify";
 
-export default function Login() {
+export default function Login({ setBusiness }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,6 +20,7 @@ export default function Login() {
     e.preventDefault();
     sessionStorage.clear();
     localStorage.clear();
+    setBusiness(null);
     // client side validation
     if (email.length === 0) {
       toast.warning("enter email");

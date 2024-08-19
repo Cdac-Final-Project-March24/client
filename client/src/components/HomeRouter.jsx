@@ -29,7 +29,7 @@ const HomeRouter = () => {
     <div>
       <Routes>
         {/* Home route */}
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Login setBusiness={setBusiness} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={<Admin />} />
         {/* Customer side routes */}
