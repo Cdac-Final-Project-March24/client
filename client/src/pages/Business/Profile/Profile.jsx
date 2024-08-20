@@ -29,7 +29,7 @@ const Profile = ({ business, setBusiness }) => {
       style={{ background: "white" }}
     >
       <div className="row">
-        <label for="name" class="form-label">
+        <label for="name" className="form-label">
           Business Name
         </label>
         <input
@@ -42,7 +42,7 @@ const Profile = ({ business, setBusiness }) => {
       </div>
 
       <div className="row ">
-        <label for="description" class="form-label">
+        <label for="description" className="form-label">
           Description
         </label>
         <textarea
@@ -54,12 +54,12 @@ const Profile = ({ business, setBusiness }) => {
         ></textarea>
       </div>
 
-      <div class="row">
-        <label for="item-img" class="form-label">
+      <div className="row">
+        <label for="item-img" className="form-label">
           Cover Image
         </label>
         <input
-          class="form-control"
+          className="form-control"
           type="file"
           id="item-img"
           onChange={(e) => setCover(e.target.files[0])}
@@ -68,7 +68,7 @@ const Profile = ({ business, setBusiness }) => {
 
       <div className="row">
         <div className="col-12 text-center">
-          <button onClick={onSubmit} class="btn btn-primary">
+          <button onClick={onSubmit} className="btn btn-primary">
             <span>Update Business</span>
           </button>
         </div>

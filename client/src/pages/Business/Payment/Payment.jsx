@@ -6,8 +6,8 @@ const Payment = () => {
       className="mt-5 p-5 rounded-3 w-50 shadow-sm d-flex flex-column align-items-center"
       style={{ background: "white" }}
     >
-      <table class="table text-center table-hover table-striped">
-        <thead class="thead-dark">
+      <table className="table text-center table-hover table-striped">
+        <thead className="thead-dark">
           <tr>
             <th scope="col">Id</th>
             <th scope="col">Date</th>

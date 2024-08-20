@@ -1,5 +1,5 @@
 export const config = {
-    url: 'http://localhost:8080',
+    url: 'http://65.0.138.174:8080',
     token: sessionStorage.getItem('token')
 }
 

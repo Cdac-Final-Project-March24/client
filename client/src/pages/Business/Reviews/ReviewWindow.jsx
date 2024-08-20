@@ -8,11 +8,11 @@ const ReviewWindow = () => {
         background: "white",
       }}
     >
-      <div class="mb-3">
-        <label for="item-desc" class="form-label">
+      <div className="mb-3">
+        <label for="item-desc" className="form-label">
           Reply
         </label>
-        <textarea class="form-control" id="item-desc" rows="3"></textarea>
+        <textarea className="form-control" id="item-desc" rows="3"></textarea>
       </div>
 
       <button className="btn btn-primary text-white">Submit</button>

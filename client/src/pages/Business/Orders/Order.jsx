@@ -62,13 +62,13 @@ const Order = ({ id, customerName, address, createdOn, subOrder, status }) => {
         <div
           style={statusArr[newStatus] === "PENDING" ? { color: "green" } : {}}
         >
-          <i class="bi bi-check-circle-fill me-2"></i>
+          <i className="bi bi-check-circle-fill me-2"></i>
           Pending
         </div>
         <div
           style={statusArr[newStatus] === "CONFIRMED" ? { color: "green" } : {}}
         >
-          <i class="bi bi-check-circle-fill me-2"></i>
+          <i className="bi bi-check-circle-fill me-2"></i>
           Confirmed
         </div>
         <div
@@ -76,13 +76,13 @@ const Order = ({ id, customerName, address, createdOn, subOrder, status }) => {
             statusArr[newStatus] === "DISPATCHED" ? { color: "green" } : {}
           }
         >
-          <i class="bi bi-check-circle-fill me-2"></i>
+          <i className="bi bi-check-circle-fill me-2"></i>
           Dispatched
         </div>
         <div
           style={statusArr[newStatus] === "DELIVERED" ? { color: "green" } : {}}
         >
-          <i class="bi bi-check-circle-fill me-2"></i>
+          <i className="bi bi-check-circle-fill me-2"></i>
           Delivered
         </div>
       </div>
