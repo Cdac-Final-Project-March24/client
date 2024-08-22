@@ -7,6 +7,7 @@ export async function login(email, password) {
   try {
     const response = await axios.post(`${config.url}/user/signin`, body);
     const status = response.status;
+    instance.defaults.headers.common['Authorization'] = `Bearer ${response.data.jwt}`;
     return { ...response.data, status };
   } catch (e) {
     console.log(e);

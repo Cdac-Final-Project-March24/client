@@ -13,8 +13,8 @@ const Home = () => {
   const [topProducts, setTopProducts] = useState([]);
   const [topServices, setTopServices] = useState([]);
   const [topBusinesses, setTopBusinesses] = useState([]);
-  const [latitude, setLatitude] = useState(null); // Initialize latitude
-  const [longitude, setLongitude] = useState(null); // Initialize longitude
+  const [latitude, setLatitude] = useState(18.5827328); // Initialize latitude
+  const [longitude, setLongitude] = useState(73.8852864); // Initialize longitude
 
   useEffect(() => {
     // Function to get user's location
