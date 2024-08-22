@@ -111,6 +111,7 @@ const Home = () => {
                         src={product.image}
                         className="card-img-top"
                         alt={product.name}
+                        style={{ aspectRatio: "1 / 1" }}
                       />
                       <div
                         className="card-body"
@@ -145,6 +146,7 @@ const Home = () => {
                         src={service.image}
                         className="card-img-top"
                         alt={service.name}
+                        style={{ aspectRatio: "1 / 1" }}
                       />
                       <div
                         className="card-body"
@@ -178,6 +180,7 @@ const Home = () => {
                       src={business.cover}
                       className="card-img-top"
                       alt={business.name}
+                      style={{ aspectRatio: "16 / 9" }}
                     />
                     <div
                       className="card-body"
